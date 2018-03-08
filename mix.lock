@@ -1,0 +1,3 @@
+%{
+  "nimble_parsec": {:git, "https://github.com/plataformatec/nimble_parsec.git", "6737ed395cc0a0a44c73adf4bae11b10a9fbc288", []},
+}

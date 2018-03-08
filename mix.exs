@@ -18,6 +18,8 @@ defmodule Recurrence.MixProject do
   end
 
   defp deps() do
-    []
+    [
+      {:nimble_parsec, github: "plataformatec/nimble_parsec"}
+    ]
   end
 end
