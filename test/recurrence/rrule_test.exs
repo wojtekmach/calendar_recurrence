@@ -30,4 +30,36 @@ defmodule Recurrence.RRULETest do
 
     {:error, {:leftover, "foobar"}} = RRULE.parse("FREQ=DAILYfoobar")
   end
+
+  test "to_recurrence/1" do
+    assert Enum.take(RRULE.to_recurrence(%RRULE{freq: :daily}, ~D[2018-01-01]), 3) == [
+      ~D[2018-01-01],
+      ~D[2018-01-02],
+      ~D[2018-01-03]
+    ]
+
+    assert Enum.to_list(RRULE.to_recurrence(%RRULE{freq: :daily, count: 3}, ~D[2018-01-01])) == [
+      ~D[2018-01-01],
+      ~D[2018-01-02],
+      ~D[2018-01-03]
+    ]
+
+    assert Enum.to_list(RRULE.to_recurrence(%RRULE{freq: :daily, until: ~D[2018-01-03]}, ~D[2018-01-01])) == [
+      ~D[2018-01-01],
+      ~D[2018-01-02],
+      ~D[2018-01-03]
+    ]
+
+    assert Enum.to_list(RRULE.to_recurrence(%RRULE{freq: :daily, count: 3, interval: 2}, ~D[2018-01-01])) == [
+      ~D[2018-01-01],
+      ~D[2018-01-03],
+      ~D[2018-01-05]
+    ]
+
+    assert Enum.to_list(RRULE.to_recurrence(%RRULE{freq: :weekly, count: 3}, ~D[2018-01-01])) == [
+      ~D[2018-01-01],
+      ~D[2018-01-08],
+      ~D[2018-01-15]
+    ]
+  end
 end

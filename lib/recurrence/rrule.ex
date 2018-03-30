@@ -38,6 +38,8 @@ defmodule Recurrence.RRULE do
           # wkst:
         }
 
+  alias __MODULE__
+
   @spec parse(String.t()) :: {:ok, t()} | {:error, term()}
   def parse(binary) do
     case Recurrence.RRULE.Parser.parse(binary) do
@@ -67,4 +69,33 @@ defmodule Recurrence.RRULE do
       {:error, reason} -> raise ArgumentError, "parse error: #{inspect(reason)}"
     end
   end
+
+  @doc """
+  Converts `rrule` into a recurrence starting at given `start` date.
+
+  ## Examples
+
+      iex> RRULE.to_recurrence(%RRULE{freq: :daily}, ~D[2018-01-01]) |> Enum.take(3)
+      [
+        ~D[2018-01-01],
+        ~D[2018-01-02],
+        ~D[2018-01-03]
+      ]
+
+  """
+  @spec to_recurrence(t(), Recurrence.date()) :: Recurrence.t()
+  def to_recurrence(rrule, start) do
+    Recurrence.new(start: start, stop: stop(rrule), step: step(rrule))
+  end
+
+  defp stop(rrule) do
+    cond do
+      rrule.count -> {:count, rrule.count}
+      rrule.until -> {:until, rrule.until}
+      true -> :never
+    end
+  end
+
+  defp step(%RRULE{freq: :daily, interval: interval}), do: interval
+  defp step(%RRULE{freq: :weekly, interval: interval}), do: 7 * interval
 end
