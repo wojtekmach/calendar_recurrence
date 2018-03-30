@@ -7,9 +7,9 @@ Recurrence is an Elixir library for working with recurring dates.
 ## Examples
 
 ```elixir
-iex> recurrence = Recurrence.new(start: ~D[2018-01-01])
+iex> recurrence = Recurrence.new(start: ~D[2018-01-01], step: 2)
 iex> Enum.take(recurrence, 3)
-[~D[2018-01-01], ~D[2018-01-02], ~D[2018-01-03]]
+[~D[2018-01-01], ~D[2018-01-03], ~D[2018-01-05]]
 ```
 
 Recurrence additionally includes a RRULE parser:

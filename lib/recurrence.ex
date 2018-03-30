@@ -24,11 +24,9 @@ defmodule Recurrence do
 
   @enforce_keys [:start]
 
-  defstruct [
-    start: nil,
-    step: 1,
-    stop: :never
-  ]
+  defstruct start: nil,
+            step: 1,
+            stop: :never
 
   @type date() :: Date.t() | Recurrence.T.t()
 
@@ -46,7 +44,12 @@ defmodule Recurrence do
   end
 
   defimpl Enumerable do
-    def count(_), do: {:error, __MODULE__}
+    def count(%Recurrence{stop: {:count, count}}),
+      do: {:ok, count}
+    def count(%Recurrence{start: start, stop: {:until, until}, step: step}) when is_integer(step),
+      do: {:ok, round((Recurrence.T.diff(until, start) + 1) / step)}
+    def count(_),
+      do: {:error, __MODULE__}
 
     def member?(_, _), do: {:error, __MODULE__}
 
@@ -73,15 +76,16 @@ defmodule Recurrence do
       end
     end
 
-    defp step(%Recurrence{step: step}, _current) when is_integer(step),
-      do: step
+    defp step(%Recurrence{step: step}, _current) when is_integer(step), do: step
+
     defp step(%Recurrence{step: stepper}, current) when is_function(stepper, 1),
       do: stepper.(current)
 
-    defp continue?(_current, _count, %Recurrence{stop: :never}),
-      do: true
+    defp continue?(_current, _count, %Recurrence{stop: :never}), do: true
+
     defp continue?(_current, count, %Recurrence{stop: {:count, max}}) when max >= 0,
       do: count <= max
+
     defp continue?(current, _count, %Recurrence{stop: {:until, date}}),
       do: Recurrence.T.continue?(current, date)
   end
@@ -91,6 +95,8 @@ defprotocol Recurrence.T do
   def continue?(t1, t2)
 
   def add(t, count)
+
+  def diff(t1, t2)
 end
 
 defimpl Recurrence.T, for: Date do
@@ -99,4 +105,6 @@ defimpl Recurrence.T, for: Date do
   end
 
   defdelegate add(date, step), to: Date
+
+  defdelegate diff(date1, date2), to: Date
 end

@@ -10,4 +10,12 @@ defmodule RecurrenceTest do
       ~D[2018-01-03]
     ]
   end
+
+  test "count" do
+    assert Enum.count(Recurrence.new(start: ~D[2018-01-01], stop: {:count, 3})) == 3
+
+    assert Enum.count(Recurrence.new(start: ~D[2018-01-01], stop: {:until, ~D[2018-01-03]})) == 3
+
+    assert Enum.count(Recurrence.new(start: ~D[2018-01-01], stop: {:until, ~D[2018-01-10]}, step: 2)) == 5
+  end
 end
