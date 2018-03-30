@@ -83,18 +83,20 @@ defmodule Recurrence do
     defp continue?(_current, count, %Recurrence{stop: {:count, max}}) when max >= 0,
       do: count <= max
     defp continue?(current, _count, %Recurrence{stop: {:until, date}}),
-      do: Recurrence.T.compare(current, date) in [:lt, :eq]
+      do: Recurrence.T.continue?(current, date)
   end
 end
 
 defprotocol Recurrence.T do
-  def compare(t1, t2)
+  def continue?(t1, t2)
 
   def add(t, count)
 end
 
 defimpl Recurrence.T, for: Date do
-  defdelegate compare(date1, date2), to: Date
+  def continue?(date1, date2) do
+    Date.compare(date1, date2) in [:lt, :eq]
+  end
 
   defdelegate add(date, step), to: Date
 end
