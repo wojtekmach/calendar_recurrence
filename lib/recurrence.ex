@@ -44,12 +44,12 @@ defmodule Recurrence do
   end
 
   defimpl Enumerable do
-    def count(%Recurrence{stop: {:count, count}}),
-      do: {:ok, count}
+    def count(%Recurrence{stop: {:count, count}}), do: {:ok, count}
+
     def count(%Recurrence{start: start, stop: {:until, until}, step: step}) when is_integer(step),
       do: {:ok, round((Recurrence.T.diff(until, start) + 1) / step)}
-    def count(_),
-      do: {:error, __MODULE__}
+
+    def count(_), do: {:error, __MODULE__}
 
     def member?(_, _), do: {:error, __MODULE__}
 
