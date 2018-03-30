@@ -96,6 +96,22 @@ defmodule Recurrence.RRULE do
     end
   end
 
-  defp step(%RRULE{freq: :daily, interval: interval}), do: interval
-  defp step(%RRULE{freq: :weekly, interval: interval}), do: 7 * interval
+  defp step(%RRULE{freq: :daily, interval: interval}),
+    do: interval
+
+  defp step(%RRULE{freq: :weekly, byday: [], interval: interval}),
+    do: 7 * interval
+
+  defp step(%RRULE{freq: :weekly, byday: days_of_week, interval: interval}) do
+    fn current ->
+      current_day_of_week = Date.day_of_week(current)
+      next_day_of_week = Enum.find(days_of_week, & &1 > current_day_of_week)
+
+      if next_day_of_week do
+        next_day_of_week - current_day_of_week
+      else
+        (interval * 7) - current_day_of_week + hd(days_of_week)
+      end
+    end
+  end
 end

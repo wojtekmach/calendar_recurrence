@@ -87,6 +87,9 @@ defmodule Recurrence.RRULE.Parser do
   hours = any_of(23..0, &string(to_string(&1)))
   byhour = part("BYHOUR", non_empty_list(hours))
 
+  days = any_of(~w(SU MO TU WE TH FR SA), &string(to_string(&1)))
+  byday = part("BYDAY", non_empty_list(days))
+
   part =
     choice([
       freq,
@@ -95,7 +98,8 @@ defmodule Recurrence.RRULE.Parser do
       interval,
       bysecond,
       byminute,
-      byhour
+      byhour,
+      byday
     ])
 
   defparsec(
@@ -129,5 +133,15 @@ defmodule Recurrence.RRULE.Parser do
     naive_datetime
   end
 
+  defp cast_value("BYDAY", days), do: Enum.map(days, &cast_byday/1)
+
   defp cast_value(_, value), do: value
+
+  defp cast_byday("SU"), do: 7
+  defp cast_byday("MO"), do: 1
+  defp cast_byday("TU"), do: 2
+  defp cast_byday("WE"), do: 3
+  defp cast_byday("TH"), do: 4
+  defp cast_byday("FR"), do: 5
+  defp cast_byday("SA"), do: 6
 end

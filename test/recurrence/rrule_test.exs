@@ -22,6 +22,8 @@ defmodule Recurrence.RRULETest do
 
     {:ok, %RRULE{freq: :daily, byhour: [5, 10]}} = RRULE.parse("FREQ=DAILY;BYHOUR=5,10")
 
+    {:ok, %RRULE{freq: :weekly, byday: [1, 2]}} = RRULE.parse("FREQ=WEEKLY;BYDAY=MO,TU")
+
     {:error, :missing_freq} = RRULE.parse("COUNT=10")
 
     {:error, :until_or_count} = RRULE.parse("FREQ=DAILY;UNTIL=20180101;COUNT=10")
@@ -60,6 +62,12 @@ defmodule Recurrence.RRULETest do
       ~D[2018-01-01],
       ~D[2018-01-08],
       ~D[2018-01-15]
+    ]
+
+    assert Enum.to_list(RRULE.to_recurrence(%RRULE{freq: :weekly, byday: [1, 2], count: 3}, ~D[2018-01-01])) == [
+      ~D[2018-01-01],
+      ~D[2018-01-02],
+      ~D[2018-01-08]
     ]
   end
 end
