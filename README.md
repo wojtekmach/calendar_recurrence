@@ -1,5 +1,7 @@
 # Recurrence
 
+[![Build Status](https://travis-ci.org/wojtekmach/recurrence.svg?branch=master)](https://travis-ci.org/wojtekmach/recurrence)
+
 Recurrence is an Elixir library for working with recurring dates.
 
 ## Examples
