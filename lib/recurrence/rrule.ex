@@ -83,9 +83,13 @@ defmodule Recurrence.RRULE do
       ]
 
   """
-  @spec to_recurrence(t(), Recurrence.date()) :: Recurrence.t()
-  def to_recurrence(rrule, start) do
+  @spec to_recurrence(t() | String.t(), Recurrence.date()) :: Recurrence.t()
+  def to_recurrence(%RRULE{} = rrule, start) do
     Recurrence.new(start: start, stop: stop(rrule), step: step(rrule))
+  end
+
+  def to_recurrence(string, start) when is_binary(string) do
+    string |> parse!() |> to_recurrence(start)
   end
 
   defp stop(rrule) do

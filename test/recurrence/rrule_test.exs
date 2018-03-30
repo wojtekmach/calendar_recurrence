@@ -34,6 +34,12 @@ defmodule Recurrence.RRULETest do
   end
 
   test "to_recurrence/1" do
+    assert Enum.take(RRULE.to_recurrence("FREQ=DAILY", ~D[2018-01-01]), 3) == [
+      ~D[2018-01-01],
+      ~D[2018-01-02],
+      ~D[2018-01-03]
+    ]
+
     assert Enum.take(RRULE.to_recurrence(%RRULE{freq: :daily}, ~D[2018-01-01]), 3) == [
       ~D[2018-01-01],
       ~D[2018-01-02],
