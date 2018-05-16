@@ -1,38 +1,40 @@
-defmodule CalendarRecurrence.RRULE.ParserHelpers do
-  @moduledoc false
+if Code.ensure_loaded?(NimbleParsec) do
+  defmodule CalendarRecurrence.RRULE.ParserHelpers do
+    @moduledoc false
 
-  import NimbleParsec
+    import NimbleParsec
 
-  def part(name, combinator) do
-    string(name)
-    |> ignore(string("="))
-    |> concat(combinator)
-  end
+    def part(name, combinator) do
+      string(name)
+      |> ignore(string("="))
+      |> concat(combinator)
+    end
 
-  def with_separator(combinator, separator_string) do
-    separator = separator_string |> string() |> ignore() |> label(separator_string)
-    concat(separator, combinator)
-  end
+    def with_separator(combinator, separator_string) do
+      separator = separator_string |> string() |> ignore() |> label(separator_string)
+      concat(separator, combinator)
+    end
 
-  def non_empty_list(combinator, separator_string \\ ",") do
-    combinator
-    |> repeat(with_separator(combinator, separator_string))
-    |> wrap()
-  end
+    def non_empty_list(combinator, separator_string \\ ",") do
+      combinator
+      |> repeat(with_separator(combinator, separator_string))
+      |> wrap()
+    end
 
-  def any_of(enumerable, fun) when is_function(fun, 1) do
-    enumerable
-    |> Enum.map(&replace(fun.(&1), &1))
-    |> choice()
-  end
+    def any_of(enumerable, fun) when is_function(fun, 1) do
+      enumerable
+      |> Enum.map(&replace(fun.(&1), &1))
+      |> choice()
+    end
 
-  def zero_pad(val, count) when val >= 0 do
-    num = Integer.to_string(val)
-    :binary.copy("0", count - byte_size(num)) <> num
-  end
+    def zero_pad(val, count) when val >= 0 do
+      num = Integer.to_string(val)
+      :binary.copy("0", count - byte_size(num)) <> num
+    end
 
-  def zero_pad(val, count) do
-    "-" <> zero_pad(-val, count)
+    def zero_pad(val, count) do
+      "-" <> zero_pad(-val, count)
+    end
   end
 end
 
