@@ -1,21 +1,21 @@
-# Recurrence
+# CalendarRecurrence
 
-[![Build Status](https://travis-ci.org/wojtekmach/recurrence.svg?branch=master)](https://travis-ci.org/wojtekmach/recurrence)
+[![Build Status](https://travis-ci.org/wojtekmach/calendar_recurrence.svg?branch=master)](https://travis-ci.org/wojtekmach/calendar_recurrence)
 
-Recurrence is an Elixir library for working with recurring dates.
+CalendarRecurrence is an Elixir library for working with recurring dates.
 
 ## Examples
 
 ```elixir
-iex> recurrence = Recurrence.new(start: ~D[2018-01-01], step: 2)
+iex> recurrence = CalendarRecurrence.new(start: ~D[2018-01-01], step: 2)
 iex> Enum.take(recurrence, 3)
 [~D[2018-01-01], ~D[2018-01-03], ~D[2018-01-05]]
 ```
 
-Recurrence additionally includes a RRULE parser:
+CalendarRecurrence additionally includes a RRULE parser:
 
 ```elixir
-iex> alias Recurrence.RRULE
+iex> alias CalendarRecurrence.RRULE
 
 iex> RRULE.parse("FREQ=DAILY;COUNT=10")
 iex> {:ok, %RRULE{freq: :daily, count: 10}}

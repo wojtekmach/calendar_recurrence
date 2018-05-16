@@ -1,1 +1,1 @@
-alias Recurrence.RRULE
+alias CalendarRecurrence.RRULE

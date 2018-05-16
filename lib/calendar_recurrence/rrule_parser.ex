@@ -1,4 +1,4 @@
-defmodule Recurrence.RRULE.ParserHelpers do
+defmodule CalendarRecurrence.RRULE.ParserHelpers do
   @moduledoc false
 
   import NimbleParsec
@@ -36,12 +36,12 @@ defmodule Recurrence.RRULE.ParserHelpers do
   end
 end
 
-defmodule Recurrence.RRULE.Parser do
+defmodule CalendarRecurrence.RRULE.Parser do
   @moduledoc false
 
-  # parsec:Recurrence.RRULE.Parser
+  # parsec:CalendarRecurrence.RRULE.Parser
   import NimbleParsec
-  import Recurrence.RRULE.ParserHelpers
+  import CalendarRecurrence.RRULE.ParserHelpers
 
   freqs = ~w(SECONDLY MINUTELY HOURLY DAILY WEEKLY MONTHLY YEARLY)
 
@@ -109,7 +109,7 @@ defmodule Recurrence.RRULE.Parser do
     |> reduce(:to_map)
   )
 
-  # parsec:Recurrence.RRULE.Parser
+  # parsec:CalendarRecurrence.RRULE.Parser
 
   defp to_map(args) do
     args

@@ -1,4 +1,4 @@
-defmodule Recurrence.RRULE do
+defmodule CalendarRecurrence.RRULE do
   @moduledoc """
   RRULE parser.
 
@@ -24,7 +24,7 @@ defmodule Recurrence.RRULE do
   @type t() :: %__MODULE__{
           freq: :daily,
           interval: pos_integer(),
-          until: Recurrence.date() | nil,
+          until: CalendarRecurrence.date() | nil,
           count: non_neg_integer() | nil
           # bysecond: [0..59],
           # byminute: [0..59],
@@ -42,7 +42,7 @@ defmodule Recurrence.RRULE do
 
   @spec parse(String.t()) :: {:ok, t()} | {:error, term()}
   def parse(binary) do
-    case Recurrence.RRULE.Parser.parse(binary) do
+    case CalendarRecurrence.RRULE.Parser.parse(binary) do
       {:ok, [map], "", _, _, _} ->
         if Map.has_key?(map, :freq) do
           if Map.has_key?(map, :until) && Map.has_key?(map, :count) do
@@ -83,9 +83,9 @@ defmodule Recurrence.RRULE do
       ]
 
   """
-  @spec to_recurrence(t() | String.t(), Recurrence.date()) :: Recurrence.t()
+  @spec to_recurrence(t() | String.t(), CalendarRecurrence.date()) :: CalendarRecurrence.t()
   def to_recurrence(%RRULE{} = rrule, start) do
-    Recurrence.new(start: start, stop: stop(rrule), step: step(rrule))
+    CalendarRecurrence.new(start: start, stop: stop(rrule), step: step(rrule))
   end
 
   def to_recurrence(string, start) when is_binary(string) do

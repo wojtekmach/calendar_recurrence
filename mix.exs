@@ -1,4 +1,4 @@
-defmodule Recurrence.MixProject do
+defmodule CalendarRecurrence.MixProject do
   use Mix.Project
 
   def project() do

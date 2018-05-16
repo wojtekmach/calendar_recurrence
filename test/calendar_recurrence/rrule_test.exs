@@ -1,7 +1,7 @@
-defmodule Recurrence.RRULETest do
+defmodule CalendarRecurrence.RRULETest do
   use ExUnit.Case, async: true
-  alias Recurrence.RRULE
-  doctest Recurrence.RRULE
+  alias CalendarRecurrence.RRULE
+  doctest CalendarRecurrence.RRULE
 
   test "parse/1" do
     {:ok, %RRULE{freq: :daily}} = RRULE.parse("FREQ=DAILY")

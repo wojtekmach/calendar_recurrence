@@ -1,22 +1,22 @@
-defmodule Recurrence do
+defmodule CalendarRecurrence do
   @moduledoc """
   Stream of recurring dates.
 
   ## Examples
 
-      iex> recurrence = Recurrence.new(start: ~D[2018-01-01])
+      iex> recurrence = CalendarRecurrence.new(start: ~D[2018-01-01])
       iex> Enum.take(recurrence, 3)
       [~D[2018-01-01], ~D[2018-01-02], ~D[2018-01-03]]
 
-      iex> recurrence = Recurrence.new(start: ~D[2018-01-01], stop: {:count, 3})
+      iex> recurrence = CalendarRecurrence.new(start: ~D[2018-01-01], stop: {:count, 3})
       iex> Enum.to_list(recurrence)
       [~D[2018-01-01], ~D[2018-01-02], ~D[2018-01-03]]
 
-      iex> recurrence = Recurrence.new(start: ~D[2018-01-01], stop: {:until, ~D[2018-01-03]})
+      iex> recurrence = CalendarRecurrence.new(start: ~D[2018-01-01], stop: {:until, ~D[2018-01-03]})
       iex> Enum.to_list(recurrence)
       [~D[2018-01-01], ~D[2018-01-02], ~D[2018-01-03]]
 
-      iex> recurrence = Recurrence.new(start: ~D[2018-01-01], step: fn _ -> 2 end)
+      iex> recurrence = CalendarRecurrence.new(start: ~D[2018-01-01], step: fn _ -> 2 end)
       iex> Enum.take(recurrence, 3)
       [~D[2018-01-01], ~D[2018-01-03], ~D[2018-01-05]]
 
@@ -28,11 +28,11 @@ defmodule Recurrence do
             step: 1,
             stop: :never
 
-  @type date() :: Date.t() | Recurrence.T.t()
+  @type date() :: Date.t() | CalendarRecurrence.T.t()
 
   @type stepper() :: (current :: date() -> pos_integer())
 
-  @type t() :: %Recurrence{
+  @type t() :: %CalendarRecurrence{
           start: Date.t(),
           stop: :never | {:until, date()} | {:count, non_neg_integer()},
           step: pos_integer() | stepper()
@@ -44,10 +44,10 @@ defmodule Recurrence do
   end
 
   defimpl Enumerable do
-    def count(%Recurrence{stop: {:count, count}}), do: {:ok, count}
+    def count(%CalendarRecurrence{stop: {:count, count}}), do: {:ok, count}
 
-    def count(%Recurrence{start: start, stop: {:until, until}, step: step}) when is_integer(step),
-      do: {:ok, round((Recurrence.T.diff(until, start) + 1) / step)}
+    def count(%CalendarRecurrence{start: start, stop: {:until, until}, step: step}) when is_integer(step),
+      do: {:ok, round((CalendarRecurrence.T.diff(until, start) + 1) / step)}
 
     def count(_), do: {:error, __MODULE__}
 
@@ -69,29 +69,29 @@ defmodule Recurrence do
 
     defp do_reduce(current, count, recurrence, {:cont, acc}, fun) do
       if continue?(current, count, recurrence) do
-        next = Recurrence.T.add(current, step(recurrence, current))
+        next = CalendarRecurrence.T.add(current, step(recurrence, current))
         do_reduce(next, count + 1, recurrence, fun.(current, acc), fun)
       else
         {:halt, acc}
       end
     end
 
-    defp step(%Recurrence{step: step}, _current) when is_integer(step), do: step
+    defp step(%CalendarRecurrence{step: step}, _current) when is_integer(step), do: step
 
-    defp step(%Recurrence{step: stepper}, current) when is_function(stepper, 1),
+    defp step(%CalendarRecurrence{step: stepper}, current) when is_function(stepper, 1),
       do: stepper.(current)
 
-    defp continue?(_current, _count, %Recurrence{stop: :never}), do: true
+    defp continue?(_current, _count, %CalendarRecurrence{stop: :never}), do: true
 
-    defp continue?(_current, count, %Recurrence{stop: {:count, max}}) when max >= 0,
+    defp continue?(_current, count, %CalendarRecurrence{stop: {:count, max}}) when max >= 0,
       do: count <= max
 
-    defp continue?(current, _count, %Recurrence{stop: {:until, date}}),
-      do: Recurrence.T.continue?(current, date)
+    defp continue?(current, _count, %CalendarRecurrence{stop: {:until, date}}),
+      do: CalendarRecurrence.T.continue?(current, date)
   end
 end
 
-defprotocol Recurrence.T do
+defprotocol CalendarRecurrence.T do
   def continue?(t1, t2)
 
   def add(t, count)
@@ -99,7 +99,7 @@ defprotocol Recurrence.T do
   def diff(t1, t2)
 end
 
-defimpl Recurrence.T, for: Date do
+defimpl CalendarRecurrence.T, for: Date do
   def continue?(date1, date2) do
     Date.compare(date1, date2) in [:lt, :eq]
   end
