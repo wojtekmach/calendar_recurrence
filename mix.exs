@@ -19,7 +19,7 @@ defmodule CalendarRecurrence.MixProject do
 
   defp deps() do
     [
-      {:nimble_parsec, github: "plataformatec/nimble_parsec"}
+      {:nimble_parsec, "~> 0.3", only: [:dev, :test]}
     ]
   end
 end
