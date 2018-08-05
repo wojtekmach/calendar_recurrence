@@ -19,7 +19,9 @@ defmodule CalendarRecurrence.MixProject do
 
   defp deps() do
     [
-      {:nimble_parsec, "~> 0.3", only: [:dev, :test]}
+      {:nimble_parsec, "~> 0.3", only: [:dev, :test]},
+      # TODO: use Hex package and add `optional: true`
+      {:calendar_interval, github: "wojtekmach/calendar_interval"}
     ]
   end
 end
