@@ -35,7 +35,7 @@ Add to `mix.exs`:
 ```elixir
 defp deps() do
   [
-    {:recurrence, github: "wojtekmach/recurrence"}
+    {:calendar_recurrence, github: "wojtekmach/calendar_recurrence"}
   ]
 end
 ```
