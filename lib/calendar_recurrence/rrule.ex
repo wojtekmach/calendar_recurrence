@@ -105,6 +105,7 @@ defmodule CalendarRecurrence.RRULE do
   defp step(%RRULE{freq: :weekly, byday: [], interval: interval}), do: 7 * interval
 
   defp step(%RRULE{freq: :weekly, byday: days_of_week, interval: interval}) do
+    days_of_week = Enum.sort(days_of_week)
     fn current ->
       current_day_of_week = Date.day_of_week(current)
       next_day_of_week = Enum.find(days_of_week, &(&1 > current_day_of_week))
