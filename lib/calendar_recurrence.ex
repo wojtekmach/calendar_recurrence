@@ -117,3 +117,13 @@ defimpl CalendarRecurrence.T, for: Date do
 
   defdelegate diff(date1, date2), to: Date
 end
+
+defimpl CalendarRecurrence.T, for: DateTime do
+  def continue?(date1, date2) do
+    DateTime.compare(date1, date2) in [:lt, :eq]
+  end
+
+  defdelegate add(date1, date2, unit), to: DateTime
+
+  defdelegate diff(date1, date2, unit), to: DateTime
+end
