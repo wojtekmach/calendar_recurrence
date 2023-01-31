@@ -26,16 +26,20 @@ defmodule CalendarRecurrence do
 
   defstruct start: nil,
             step: 1,
-            stop: :never
+            stop: :never,
+            unit: :day
 
   @type date() :: Date.t() | CalendarRecurrence.T.t()
 
   @type stepper() :: (current :: date() -> pos_integer())
 
+  @type unit() :: :day | :hour | :minute | System.time_unit()
+
   @type t() :: %CalendarRecurrence{
           start: Date.t(),
           stop: :never | {:until, date()} | {:count, non_neg_integer()},
-          step: pos_integer() | stepper()
+          step: pos_integer() | stepper(),
+          unit: unit()
         }
 
   @spec new(keyword()) :: t()
@@ -46,8 +50,9 @@ defmodule CalendarRecurrence do
   defimpl Enumerable do
     def count(%CalendarRecurrence{stop: {:count, count}}), do: {:ok, count}
 
-    def count(%CalendarRecurrence{start: start, stop: {:until, until}, step: step}) when is_integer(step),
-      do: {:ok, round((CalendarRecurrence.T.diff(until, start) + 1) / step)}
+    def count(%CalendarRecurrence{start: start, stop: {:until, until}, step: step, unit: unit})
+        when is_integer(step),
+        do: {:ok, round((CalendarRecurrence.T.diff(until, start, unit) + 1) / step)}
 
     def count(_), do: {:error, __MODULE__}
 
@@ -69,7 +74,7 @@ defmodule CalendarRecurrence do
 
     defp do_reduce(current, count, recurrence, {:cont, acc}, fun) do
       if continue?(current, count, recurrence) do
-        next = CalendarRecurrence.T.add(current, step(recurrence, current))
+        next = CalendarRecurrence.T.add(current, step(recurrence, current), recurrence.unit)
         do_reduce(next, count + 1, recurrence, fun.(current, acc), fun)
       else
         {:halt, acc}
@@ -94,9 +99,9 @@ end
 defprotocol CalendarRecurrence.T do
   def continue?(t1, t2)
 
-  def add(t, count)
+  def add(t, count, unit)
 
-  def diff(t1, t2)
+  def diff(t1, t2, unit)
 end
 
 defimpl CalendarRecurrence.T, for: Date do
@@ -104,7 +109,11 @@ defimpl CalendarRecurrence.T, for: Date do
     Date.compare(date1, date2) in [:lt, :eq]
   end
 
+  def add(date, step, _unit), do: add(date, step)
+
   defdelegate add(date, step), to: Date
+
+  def diff(date, step, _unit), do: diff(date, step)
 
   defdelegate diff(date1, date2), to: Date
 end
