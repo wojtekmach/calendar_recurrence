@@ -84,6 +84,10 @@ defmodule CalendarRecurrence.RRULE do
 
   """
   @spec to_recurrence(t() | String.t(), CalendarRecurrence.date()) :: CalendarRecurrence.t()
+  def to_recurrence(%RRULE{} = rrule, %DateTime{} = start) do
+    CalendarRecurrence.new(start: start, stop: stop(rrule), step: step(rrule), unit: :second)
+  end
+
   def to_recurrence(%RRULE{} = rrule, start) do
     CalendarRecurrence.new(start: start, stop: stop(rrule), step: step(rrule))
   end
@@ -100,21 +104,64 @@ defmodule CalendarRecurrence.RRULE do
     end
   end
 
-  defp step(%RRULE{freq: :daily, interval: interval}), do: interval
+  defp step(%RRULE{freq: :weekly, byday: [], interval: interval}),
+    do: fn
+      %DateTime{} = date ->
+        DateTime.add(date, interval * 7, :day) |> DateTime.diff(date, :second) |> abs
 
-  defp step(%RRULE{freq: :weekly, byday: [], interval: interval}), do: 7 * interval
+      _date ->
+        7 * interval
+    end
 
   defp step(%RRULE{freq: :weekly, byday: days_of_week, interval: interval}) do
     days_of_week = Enum.sort(days_of_week)
-    fn current ->
-      current_day_of_week = Date.day_of_week(current)
-      next_day_of_week = Enum.find(days_of_week, &(&1 > current_day_of_week))
 
-      if next_day_of_week do
-        next_day_of_week - current_day_of_week
-      else
-        interval * 7 - current_day_of_week + hd(days_of_week)
-      end
+    fn
+      %DateTime{} = current ->
+        current_day_of_week = Date.day_of_week(current)
+        next_day_of_week = Enum.find(days_of_week, &(&1 > current_day_of_week))
+
+        if next_day_of_week do
+          DateTime.add(current, next_day_of_week - current_day_of_week, :day)
+          |> DateTime.diff(current, :second)
+          |> abs
+        else
+          DateTime.add(current, interval * 7 - current_day_of_week + hd(days_of_week), :day)
+          |> DateTime.diff(current, :second)
+          |> abs()
+        end
+
+      current ->
+        current_day_of_week = Date.day_of_week(current)
+        next_day_of_week = Enum.find(days_of_week, &(&1 > current_day_of_week))
+
+        if next_day_of_week do
+          next_day_of_week - current_day_of_week
+        else
+          interval * 7 - current_day_of_week + hd(days_of_week)
+        end
     end
   end
+
+  defp step(%RRULE{freq: :daily, interval: interval}),
+    do: fn
+      %DateTime{} = date ->
+        DateTime.add(date, interval, :day) |> DateTime.diff(date, :second) |> abs
+
+      _date ->
+        interval
+    end
+
+  defp step(%RRULE{freq: :hourly, interval: interval}),
+    do: fn date -> DateTime.add(date, interval, :hour) |> DateTime.diff(date, :second) |> abs end
+
+  defp step(%RRULE{freq: :minutely, interval: interval}),
+    do: fn date ->
+      DateTime.add(date, interval, :minute) |> DateTime.diff(date, :second) |> abs
+    end
+
+  defp step(%RRULE{freq: :secondly, interval: interval}),
+    do: fn date ->
+      DateTime.add(date, interval, :second) |> DateTime.diff(date, :second) |> abs
+    end
 end

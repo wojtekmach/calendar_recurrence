@@ -83,5 +83,58 @@ defmodule CalendarRecurrence.RRULETest do
              ~D[2018-01-02],
              ~D[2018-01-08]
            ]
+
+    assert Enum.to_list(
+             RRULE.to_recurrence(%RRULE{freq: :weekly, count: 3}, ~U"2018-01-01 10:00:00Z")
+           ) ==
+             [
+               ~U"2018-01-01 10:00:00Z",
+               ~U"2018-01-08 10:00:00Z",
+               ~U"2018-01-15 10:00:00Z"
+             ]
+
+    assert Enum.to_list(
+             RRULE.to_recurrence(
+               %RRULE{freq: :weekly, byday: [1, 2], count: 3},
+               ~U"2018-01-01 10:00:00Z"
+             )
+           ) == [
+             ~U[2018-01-01 10:00:00Z],
+             ~U[2018-01-02 10:00:00Z],
+             ~U[2018-01-08 10:00:00Z]
+           ]
+
+    assert Enum.to_list(
+             RRULE.to_recurrence(%RRULE{freq: :daily, count: 3}, ~U"2018-01-01 10:00:00Z")
+           ) ==
+             [
+               ~U"2018-01-01 10:00:00Z",
+               ~U"2018-01-02 10:00:00Z",
+               ~U"2018-01-03 10:00:00Z"
+             ]
+
+    assert Enum.to_list(
+             RRULE.to_recurrence(%RRULE{freq: :hourly, count: 3}, ~U"2018-01-01 10:00:00Z")
+           ) == [
+             ~U"2018-01-01 10:00:00Z",
+             ~U"2018-01-01 11:00:00Z",
+             ~U"2018-01-01 12:00:00Z"
+           ]
+
+    assert Enum.to_list(
+             RRULE.to_recurrence(%RRULE{freq: :minutely, count: 3}, ~U"2018-01-01 10:00:00Z")
+           ) == [
+             ~U"2018-01-01 10:00:00Z",
+             ~U"2018-01-01 10:01:00Z",
+             ~U"2018-01-01 10:02:00Z"
+           ]
+
+    assert Enum.to_list(
+             RRULE.to_recurrence(%RRULE{freq: :secondly, count: 3}, ~U"2018-01-01 10:00:00Z")
+           ) == [
+             ~U"2018-01-01 10:00:00Z",
+             ~U"2018-01-01 10:00:01Z",
+             ~U"2018-01-01 10:00:02Z"
+           ]
   end
 end
