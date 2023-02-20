@@ -1,6 +1,6 @@
 if Code.ensure_loaded?(CalendarInterval) do
   defimpl CalendarRecurrence.T, for: CalendarInterval do
-    def add(interval, count) do
+    def add(interval, count, _unit) do
       :day = interval.precision
       CalendarInterval.next(interval, count)
     end
