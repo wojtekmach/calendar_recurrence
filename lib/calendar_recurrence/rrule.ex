@@ -107,7 +107,7 @@ defmodule CalendarRecurrence.RRULE do
   defp step(%RRULE{freq: :weekly, byday: [], interval: interval}),
     do: fn
       %DateTime{} = date ->
-        DateTime.add(date, interval * 7, :day) |> DateTime.diff(date, :second) |> abs
+        DateTime.add(date, interval * 7, :day) |> DateTime.diff(date, :second)
 
       _date ->
         7 * interval
@@ -124,11 +124,9 @@ defmodule CalendarRecurrence.RRULE do
         if next_day_of_week do
           DateTime.add(current, next_day_of_week - current_day_of_week, :day)
           |> DateTime.diff(current, :second)
-          |> abs
         else
           DateTime.add(current, interval * 7 - current_day_of_week + hd(days_of_week), :day)
           |> DateTime.diff(current, :second)
-          |> abs()
         end
 
       current ->
@@ -146,22 +144,22 @@ defmodule CalendarRecurrence.RRULE do
   defp step(%RRULE{freq: :daily, interval: interval}),
     do: fn
       %DateTime{} = date ->
-        DateTime.add(date, interval, :day) |> DateTime.diff(date, :second) |> abs
+        DateTime.add(date, interval, :day) |> DateTime.diff(date, :second)
 
       _date ->
         interval
     end
 
   defp step(%RRULE{freq: :hourly, interval: interval}),
-    do: fn date -> DateTime.add(date, interval, :hour) |> DateTime.diff(date, :second) |> abs end
+    do: fn date -> DateTime.add(date, interval, :hour) |> DateTime.diff(date, :second) end
 
   defp step(%RRULE{freq: :minutely, interval: interval}),
     do: fn date ->
-      DateTime.add(date, interval, :minute) |> DateTime.diff(date, :second) |> abs
+      DateTime.add(date, interval, :minute) |> DateTime.diff(date, :second)
     end
 
   defp step(%RRULE{freq: :secondly, interval: interval}),
     do: fn date ->
-      DateTime.add(date, interval, :second) |> DateTime.diff(date, :second) |> abs
+      DateTime.add(date, interval, :second) |> DateTime.diff(date, :second)
     end
 end
