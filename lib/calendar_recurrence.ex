@@ -109,13 +109,9 @@ defimpl CalendarRecurrence.T, for: Date do
     Date.compare(date1, date2) in [:lt, :eq]
   end
 
-  def add(date, step, _unit), do: add(date, step)
+  def add(date, step, _unit), do: Date.add(date, step)
 
-  defdelegate add(date, step), to: Date
-
-  def diff(date, step, _unit), do: diff(date, step)
-
-  defdelegate diff(date1, date2), to: Date
+  def diff(date, step, _unit), do: Date.diff(date, step)
 end
 
 defimpl CalendarRecurrence.T, for: DateTime do
