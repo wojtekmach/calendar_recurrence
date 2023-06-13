@@ -77,7 +77,7 @@ defmodule CalendarRecurrence do
         next = CalendarRecurrence.T.add(current, step(recurrence, current), recurrence.unit)
         do_reduce(next, count + 1, recurrence, fun.(current, acc), fun)
       else
-        {:halt, acc}
+        {:halted, acc}
       end
     end
 
