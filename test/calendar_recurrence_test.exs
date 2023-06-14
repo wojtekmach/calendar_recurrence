@@ -1,4 +1,5 @@
 defmodule CalendarRecurrenceTest do
+  alias CalendarRecurrence.RRULE
   use ExUnit.Case, async: true
   doctest CalendarRecurrence
 
@@ -6,6 +7,12 @@ defmodule CalendarRecurrenceTest do
     recurrence = CalendarRecurrence.new(start: ~D[2018-01-01])
 
     assert Enum.take(recurrence, 3) == [
+             ~D[2018-01-01],
+             ~D[2018-01-02],
+             ~D[2018-01-03]
+           ]
+
+    assert Stream.take(recurrence, 3) |> Enum.to_list() == [
              ~D[2018-01-01],
              ~D[2018-01-02],
              ~D[2018-01-03]
@@ -22,6 +29,27 @@ defmodule CalendarRecurrenceTest do
              ~U[2018-01-01 10:00:00Z],
              ~U[2018-01-02 10:00:00Z],
              ~U[2018-01-03 10:00:00Z]
+           ]
+
+    assert Stream.take(recurrence, 3) |> Enum.to_list() == [
+             ~U[2018-01-01 10:00:00Z],
+             ~U[2018-01-02 10:00:00Z],
+             ~U[2018-01-03 10:00:00Z]
+           ]
+
+    recurrence = RRULE.to_recurrence(%RRULE{freq: :daily, count: 3}, ~U[2019-01-01 10:50:00Z])
+
+    assert recurrence
+           |> Stream.take_while(fn occurrence ->
+             DateTime.compare(~U[2019-01-05 10:00:00Z], occurrence) in [:gt, :eq]
+           end)
+           |> Stream.filter(fn occurence ->
+             DateTime.compare(~U[2019-01-01 10:00:00Z], occurence) in [:lt, :eq]
+           end)
+           |> Enum.to_list() == [
+             ~U[2019-01-01 10:50:00Z],
+             ~U[2019-01-02 10:50:00Z],
+             ~U[2019-01-03 10:50:00Z]
            ]
   end
 
