@@ -85,24 +85,55 @@ defmodule CalendarRecurrence.RRULE do
   """
   @spec to_recurrence(t() | String.t(), CalendarRecurrence.date()) :: CalendarRecurrence.t()
   def to_recurrence(%RRULE{} = rrule, %DateTime{} = start) do
-    CalendarRecurrence.new(start: start, stop: stop(rrule), step: step(rrule), unit: :second)
+    CalendarRecurrence.new(
+      start: start,
+      stop: stop(rrule, start),
+      step: step(rrule),
+      unit: :second
+    )
   end
 
   def to_recurrence(%RRULE{} = rrule, start) do
-    CalendarRecurrence.new(start: start, stop: stop(rrule), step: step(rrule))
+    CalendarRecurrence.new(start: start, stop: stop(rrule, start), step: step(rrule))
   end
 
   def to_recurrence(string, start) when is_binary(string) do
     string |> parse!() |> to_recurrence(start)
   end
 
-  defp stop(rrule) do
+  defp stop(rrule, start) do
     cond do
       rrule.count -> {:count, rrule.count}
-      rrule.until -> {:until, rrule.until}
+      rrule.until -> {:until, convert_date_type(rrule, start)}
       true -> :never
     end
   end
+
+  defp convert_date_type(%RRULE{until: %Date{} = until}, %NaiveDateTime{}) do
+    NaiveDateTime.new!(until, ~T[23:59:59])
+  end
+
+  defp convert_date_type(%RRULE{until: %Date{} = until}, %DateTime{}) do
+    DateTime.new!(until, ~T[23:59:59], "Etc/UTC")
+  end
+
+  defp convert_date_type(%RRULE{until: %NaiveDateTime{} = until}, %Date{}) do
+    NaiveDateTime.to_date(until)
+  end
+
+  defp convert_date_type(%RRULE{until: %NaiveDateTime{} = until}, %DateTime{}) do
+    DateTime.from_naive!(until, "Etc/UTC")
+  end
+
+  defp convert_date_type(%RRULE{until: %DateTime{} = until}, %Date{}) do
+    DateTime.to_date(until)
+  end
+
+  defp convert_date_type(%RRULE{until: %DateTime{} = until}, %NaiveDateTime{}) do
+    DateTime.to_naive(until)
+  end
+
+  defp convert_date_type(%RRULE{until: until}, _), do: until
 
   defp step(%RRULE{freq: :weekly, byday: [], interval: interval}),
     do: fn
