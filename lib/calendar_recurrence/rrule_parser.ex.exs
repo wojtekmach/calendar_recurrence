@@ -132,7 +132,9 @@ defmodule CalendarRecurrence.RRULE.Parser do
 
   defp cast_value("UNTIL", [year, month, day, hour, minute, second]) do
     {:ok, naive_datetime} = NaiveDateTime.new(year, month, day, hour, minute, second)
-    naive_datetime
+    {:ok, datetime} = DateTime.from_naive(naive_datetime, "Etc/UTC")
+
+    datetime
   end
 
   defp cast_value("BYDAY", days), do: Enum.map(days, &cast_byday/1)

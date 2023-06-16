@@ -1,5 +1,5 @@
 # Generated from lib/calendar_recurrence/rrule_parser.ex.exs, do not edit.
-# Generated at 2018-05-16 23:42:45Z.
+# Generated at 2023-06-16 16:44:47Z.
 
 if Code.ensure_loaded?(NimbleParsec) do
   defmodule CalendarRecurrence.RRULE.ParserHelpers do
@@ -47,15 +47,17 @@ defmodule CalendarRecurrence.RRULE.Parser do
   @doc """
   Parses the given `binary` as parse.
 
-  Returns `{:ok, [token], rest, context, line, byte_offset}` or
-  `{:error, reason, rest, context, line, byte_offset}`.
+  Returns `{:ok, [token], rest, context, position, byte_offset}` or
+  `{:error, reason, rest, context, line, byte_offset}` where `position`
+  describes the location of the parse (start position) as `{line, offset_to_start_of_line}`.
+
+  To column where the error occurred can be inferred from `byte_offset - offset_to_start_of_line`.
 
   ## Options
 
-    * `:line` - the initial line, defaults to 1
-    * `:byte_offset` - the initial byte offset, defaults to 0
-    * `:context` - the initial context value. It will be converted
-      to a map
+    * `:byte_offset` - the byte offset for the whole binary, defaults to 0
+    * `:line` - the line and the byte offset into that line, defaults to `{1, byte_offset}`
+    * `:context` - the initial context value. It will be converted to a map
 
   """
   @spec parse(binary, keyword) ::
@@ -65,13 +67,18 @@ defmodule CalendarRecurrence.RRULE.Parser do
              byte_offset: pos_integer,
              rest: binary,
              reason: String.t(),
-             context: map()
+             context: map
   def parse(binary, opts \\ []) when is_binary(binary) do
-    line = Keyword.get(opts, :line, 1)
-    offset = Keyword.get(opts, :byte_offset, 0)
     context = Map.new(Keyword.get(opts, :context, []))
+    byte_offset = Keyword.get(opts, :byte_offset, 0)
 
-    case(parse__0(binary, [], [], context, {line, offset}, offset)) do
+    line =
+      case Keyword.get(opts, :line, 1) do
+        {_, _} = line -> line
+        line -> {line, byte_offset}
+      end
+
+    case parse__0(binary, [], [], context, line, byte_offset) do
       {:ok, acc, rest, context, line, offset} ->
         {:ok, :lists.reverse(acc), rest, context, line, offset}
 
@@ -94,7 +101,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
 
   defp parse__3(rest, _acc, _stack, context, line, offset) do
     {:error,
-     "expected string \"FREQ\", followed by string \"=\", followed by string \"SECONDLY\" or string \"MINUTELY\" or string \"HOURLY\" or string \"DAILY\" or string \"WEEKLY\" or string \"MONTHLY\" or string \"YEARLY\" or string \"UNTIL\", followed by string \"=\", followed by datetime or date or string \"COUNT\", followed by string \"=\", followed by byte in the range ?0..?9, followed by byte in the range ?0..?9 or string \"INTERVAL\", followed by string \"=\", followed by byte in the range ?0..?9, followed by byte in the range ?0..?9 or string \"BYSECOND\", followed by string \"=\", followed by string \"59\" or string \"58\" or string \"57\" or string \"56\" or string \"55\" or string \"54\" or string \"53\" or string \"52\" or string \"51\" or string \"50\" or string \"49\" or string \"48\" or string \"47\" or string \"46\" or string \"45\" or string \"44\" or string \"43\" or string \"42\" or string \"41\" or string \"40\" or string \"39\" or string \"38\" or string \"37\" or string \"36\" or string \"35\" or string \"34\" or string \"33\" or string \"32\" or string \"31\" or string \"30\" or string \"29\" or string \"28\" or string \"27\" or string \"26\" or string \"25\" or string \"24\" or string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\", followed by ,, followed by string \"59\" or string \"58\" or string \"57\" or string \"56\" or string \"55\" or string \"54\" or string \"53\" or string \"52\" or string \"51\" or string \"50\" or string \"49\" or string \"48\" or string \"47\" or string \"46\" or string \"45\" or string \"44\" or string \"43\" or string \"42\" or string \"41\" or string \"40\" or string \"39\" or string \"38\" or string \"37\" or string \"36\" or string \"35\" or string \"34\" or string \"33\" or string \"32\" or string \"31\" or string \"30\" or string \"29\" or string \"28\" or string \"27\" or string \"26\" or string \"25\" or string \"24\" or string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\" or string \"BYMINUTE\", followed by string \"=\", followed by string \"59\" or string \"58\" or string \"57\" or string \"56\" or string \"55\" or string \"54\" or string \"53\" or string \"52\" or string \"51\" or string \"50\" or string \"49\" or string \"48\" or string \"47\" or string \"46\" or string \"45\" or string \"44\" or string \"43\" or string \"42\" or string \"41\" or string \"40\" or string \"39\" or string \"38\" or string \"37\" or string \"36\" or string \"35\" or string \"34\" or string \"33\" or string \"32\" or string \"31\" or string \"30\" or string \"29\" or string \"28\" or string \"27\" or string \"26\" or string \"25\" or string \"24\" or string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\", followed by ,, followed by string \"59\" or string \"58\" or string \"57\" or string \"56\" or string \"55\" or string \"54\" or string \"53\" or string \"52\" or string \"51\" or string \"50\" or string \"49\" or string \"48\" or string \"47\" or string \"46\" or string \"45\" or string \"44\" or string \"43\" or string \"42\" or string \"41\" or string \"40\" or string \"39\" or string \"38\" or string \"37\" or string \"36\" or string \"35\" or string \"34\" or string \"33\" or string \"32\" or string \"31\" or string \"30\" or string \"29\" or string \"28\" or string \"27\" or string \"26\" or string \"25\" or string \"24\" or string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\" or string \"BYHOUR\", followed by string \"=\", followed by string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\", followed by ,, followed by string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\" or string \"BYDAY\", followed by string \"=\", followed by string \"SU\" or string \"MO\" or string \"TU\" or string \"WE\" or string \"TH\" or string \"FR\" or string \"SA\", followed by ,, followed by string \"SU\" or string \"MO\" or string \"TU\" or string \"WE\" or string \"TH\" or string \"FR\" or string \"SA\"",
+     "expected string \"FREQ\", followed by string \"=\", followed by string \"SECONDLY\" or string \"MINUTELY\" or string \"HOURLY\" or string \"DAILY\" or string \"WEEKLY\" or string \"MONTHLY\" or string \"YEARLY\" or string \"UNTIL\", followed by string \"=\", followed by datetime or date or string \"COUNT\", followed by string \"=\", followed by ASCII character in the range \"0\" to \"9\", followed by ASCII character in the range \"0\" to \"9\" or string \"INTERVAL\", followed by string \"=\", followed by ASCII character in the range \"0\" to \"9\", followed by ASCII character in the range \"0\" to \"9\" or string \"BYSECOND\", followed by string \"=\", followed by string \"59\" or string \"58\" or string \"57\" or string \"56\" or string \"55\" or string \"54\" or string \"53\" or string \"52\" or string \"51\" or string \"50\" or string \"49\" or string \"48\" or string \"47\" or string \"46\" or string \"45\" or string \"44\" or string \"43\" or string \"42\" or string \"41\" or string \"40\" or string \"39\" or string \"38\" or string \"37\" or string \"36\" or string \"35\" or string \"34\" or string \"33\" or string \"32\" or string \"31\" or string \"30\" or string \"29\" or string \"28\" or string \"27\" or string \"26\" or string \"25\" or string \"24\" or string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\", followed by ,, followed by string \"59\" or string \"58\" or string \"57\" or string \"56\" or string \"55\" or string \"54\" or string \"53\" or string \"52\" or string \"51\" or string \"50\" or string \"49\" or string \"48\" or string \"47\" or string \"46\" or string \"45\" or string \"44\" or string \"43\" or string \"42\" or string \"41\" or string \"40\" or string \"39\" or string \"38\" or string \"37\" or string \"36\" or string \"35\" or string \"34\" or string \"33\" or string \"32\" or string \"31\" or string \"30\" or string \"29\" or string \"28\" or string \"27\" or string \"26\" or string \"25\" or string \"24\" or string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\" or string \"BYMINUTE\", followed by string \"=\", followed by string \"59\" or string \"58\" or string \"57\" or string \"56\" or string \"55\" or string \"54\" or string \"53\" or string \"52\" or string \"51\" or string \"50\" or string \"49\" or string \"48\" or string \"47\" or string \"46\" or string \"45\" or string \"44\" or string \"43\" or string \"42\" or string \"41\" or string \"40\" or string \"39\" or string \"38\" or string \"37\" or string \"36\" or string \"35\" or string \"34\" or string \"33\" or string \"32\" or string \"31\" or string \"30\" or string \"29\" or string \"28\" or string \"27\" or string \"26\" or string \"25\" or string \"24\" or string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\", followed by ,, followed by string \"59\" or string \"58\" or string \"57\" or string \"56\" or string \"55\" or string \"54\" or string \"53\" or string \"52\" or string \"51\" or string \"50\" or string \"49\" or string \"48\" or string \"47\" or string \"46\" or string \"45\" or string \"44\" or string \"43\" or string \"42\" or string \"41\" or string \"40\" or string \"39\" or string \"38\" or string \"37\" or string \"36\" or string \"35\" or string \"34\" or string \"33\" or string \"32\" or string \"31\" or string \"30\" or string \"29\" or string \"28\" or string \"27\" or string \"26\" or string \"25\" or string \"24\" or string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\" or string \"BYHOUR\", followed by string \"=\", followed by string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\", followed by ,, followed by string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\" or string \"BYDAY\", followed by string \"=\", followed by string \"SU\" or string \"MO\" or string \"TU\" or string \"WE\" or string \"TH\" or string \"FR\" or string \"SA\", followed by ,, followed by string \"SU\" or string \"MO\" or string \"TU\" or string \"WE\" or string \"TH\" or string \"FR\" or string \"SA\"",
      rest, context, line, offset}
   end
 
@@ -132,7 +139,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
 
   defp parse__5(rest, _acc, _stack, context, line, offset) do
     {:error,
-     "expected string \"FREQ\", followed by string \"=\", followed by string \"SECONDLY\" or string \"MINUTELY\" or string \"HOURLY\" or string \"DAILY\" or string \"WEEKLY\" or string \"MONTHLY\" or string \"YEARLY\" or string \"UNTIL\", followed by string \"=\", followed by datetime or date or string \"COUNT\", followed by string \"=\", followed by byte in the range ?0..?9, followed by byte in the range ?0..?9 or string \"INTERVAL\", followed by string \"=\", followed by byte in the range ?0..?9, followed by byte in the range ?0..?9 or string \"BYSECOND\", followed by string \"=\", followed by string \"59\" or string \"58\" or string \"57\" or string \"56\" or string \"55\" or string \"54\" or string \"53\" or string \"52\" or string \"51\" or string \"50\" or string \"49\" or string \"48\" or string \"47\" or string \"46\" or string \"45\" or string \"44\" or string \"43\" or string \"42\" or string \"41\" or string \"40\" or string \"39\" or string \"38\" or string \"37\" or string \"36\" or string \"35\" or string \"34\" or string \"33\" or string \"32\" or string \"31\" or string \"30\" or string \"29\" or string \"28\" or string \"27\" or string \"26\" or string \"25\" or string \"24\" or string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\", followed by ,, followed by string \"59\" or string \"58\" or string \"57\" or string \"56\" or string \"55\" or string \"54\" or string \"53\" or string \"52\" or string \"51\" or string \"50\" or string \"49\" or string \"48\" or string \"47\" or string \"46\" or string \"45\" or string \"44\" or string \"43\" or string \"42\" or string \"41\" or string \"40\" or string \"39\" or string \"38\" or string \"37\" or string \"36\" or string \"35\" or string \"34\" or string \"33\" or string \"32\" or string \"31\" or string \"30\" or string \"29\" or string \"28\" or string \"27\" or string \"26\" or string \"25\" or string \"24\" or string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\" or string \"BYMINUTE\", followed by string \"=\", followed by string \"59\" or string \"58\" or string \"57\" or string \"56\" or string \"55\" or string \"54\" or string \"53\" or string \"52\" or string \"51\" or string \"50\" or string \"49\" or string \"48\" or string \"47\" or string \"46\" or string \"45\" or string \"44\" or string \"43\" or string \"42\" or string \"41\" or string \"40\" or string \"39\" or string \"38\" or string \"37\" or string \"36\" or string \"35\" or string \"34\" or string \"33\" or string \"32\" or string \"31\" or string \"30\" or string \"29\" or string \"28\" or string \"27\" or string \"26\" or string \"25\" or string \"24\" or string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\", followed by ,, followed by string \"59\" or string \"58\" or string \"57\" or string \"56\" or string \"55\" or string \"54\" or string \"53\" or string \"52\" or string \"51\" or string \"50\" or string \"49\" or string \"48\" or string \"47\" or string \"46\" or string \"45\" or string \"44\" or string \"43\" or string \"42\" or string \"41\" or string \"40\" or string \"39\" or string \"38\" or string \"37\" or string \"36\" or string \"35\" or string \"34\" or string \"33\" or string \"32\" or string \"31\" or string \"30\" or string \"29\" or string \"28\" or string \"27\" or string \"26\" or string \"25\" or string \"24\" or string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\" or string \"BYHOUR\", followed by string \"=\", followed by string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\", followed by ,, followed by string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\" or string \"BYDAY\", followed by string \"=\", followed by string \"SU\" or string \"MO\" or string \"TU\" or string \"WE\" or string \"TH\" or string \"FR\" or string \"SA\", followed by ,, followed by string \"SU\" or string \"MO\" or string \"TU\" or string \"WE\" or string \"TH\" or string \"FR\" or string \"SA\"",
+     "expected string \"FREQ\", followed by string \"=\", followed by string \"SECONDLY\" or string \"MINUTELY\" or string \"HOURLY\" or string \"DAILY\" or string \"WEEKLY\" or string \"MONTHLY\" or string \"YEARLY\" or string \"UNTIL\", followed by string \"=\", followed by datetime or date or string \"COUNT\", followed by string \"=\", followed by ASCII character in the range \"0\" to \"9\", followed by ASCII character in the range \"0\" to \"9\" or string \"INTERVAL\", followed by string \"=\", followed by ASCII character in the range \"0\" to \"9\", followed by ASCII character in the range \"0\" to \"9\" or string \"BYSECOND\", followed by string \"=\", followed by string \"59\" or string \"58\" or string \"57\" or string \"56\" or string \"55\" or string \"54\" or string \"53\" or string \"52\" or string \"51\" or string \"50\" or string \"49\" or string \"48\" or string \"47\" or string \"46\" or string \"45\" or string \"44\" or string \"43\" or string \"42\" or string \"41\" or string \"40\" or string \"39\" or string \"38\" or string \"37\" or string \"36\" or string \"35\" or string \"34\" or string \"33\" or string \"32\" or string \"31\" or string \"30\" or string \"29\" or string \"28\" or string \"27\" or string \"26\" or string \"25\" or string \"24\" or string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\", followed by ,, followed by string \"59\" or string \"58\" or string \"57\" or string \"56\" or string \"55\" or string \"54\" or string \"53\" or string \"52\" or string \"51\" or string \"50\" or string \"49\" or string \"48\" or string \"47\" or string \"46\" or string \"45\" or string \"44\" or string \"43\" or string \"42\" or string \"41\" or string \"40\" or string \"39\" or string \"38\" or string \"37\" or string \"36\" or string \"35\" or string \"34\" or string \"33\" or string \"32\" or string \"31\" or string \"30\" or string \"29\" or string \"28\" or string \"27\" or string \"26\" or string \"25\" or string \"24\" or string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\" or string \"BYMINUTE\", followed by string \"=\", followed by string \"59\" or string \"58\" or string \"57\" or string \"56\" or string \"55\" or string \"54\" or string \"53\" or string \"52\" or string \"51\" or string \"50\" or string \"49\" or string \"48\" or string \"47\" or string \"46\" or string \"45\" or string \"44\" or string \"43\" or string \"42\" or string \"41\" or string \"40\" or string \"39\" or string \"38\" or string \"37\" or string \"36\" or string \"35\" or string \"34\" or string \"33\" or string \"32\" or string \"31\" or string \"30\" or string \"29\" or string \"28\" or string \"27\" or string \"26\" or string \"25\" or string \"24\" or string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\", followed by ,, followed by string \"59\" or string \"58\" or string \"57\" or string \"56\" or string \"55\" or string \"54\" or string \"53\" or string \"52\" or string \"51\" or string \"50\" or string \"49\" or string \"48\" or string \"47\" or string \"46\" or string \"45\" or string \"44\" or string \"43\" or string \"42\" or string \"41\" or string \"40\" or string \"39\" or string \"38\" or string \"37\" or string \"36\" or string \"35\" or string \"34\" or string \"33\" or string \"32\" or string \"31\" or string \"30\" or string \"29\" or string \"28\" or string \"27\" or string \"26\" or string \"25\" or string \"24\" or string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\" or string \"BYHOUR\", followed by string \"=\", followed by string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\", followed by ,, followed by string \"23\" or string \"22\" or string \"21\" or string \"20\" or string \"19\" or string \"18\" or string \"17\" or string \"16\" or string \"15\" or string \"14\" or string \"13\" or string \"12\" or string \"11\" or string \"10\" or string \"9\" or string \"8\" or string \"7\" or string \"6\" or string \"5\" or string \"4\" or string \"3\" or string \"2\" or string \"1\" or string \"0\" or string \"BYDAY\", followed by string \"=\", followed by string \"SU\" or string \"MO\" or string \"TU\" or string \"WE\" or string \"TH\" or string \"FR\" or string \"SA\", followed by ,, followed by string \"SU\" or string \"MO\" or string \"TU\" or string \"WE\" or string \"TH\" or string \"FR\" or string \"SA\"",
      rest, context, line, offset}
   end
 
@@ -192,6 +199,8 @@ defmodule CalendarRecurrence.RRULE.Parser do
          inner_line,
          inner_offset
        ) do
+    _ = {rest, acc, context, line, offset}
+
     parse__8(
       inner_rest,
       [],
@@ -203,6 +212,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__11(rest, user_acc, [acc | stack], context, line, offset) do
+    _ = user_acc
     parse__12(rest, [:lists.reverse(user_acc)] ++ acc, stack, context, line, offset)
   end
 
@@ -291,7 +301,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__16(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__17(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__17(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__16(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -322,7 +332,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__17(rest, [0] ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
-  defp parse__16(rest, acc, stack, context, line, offset) do
+  defp parse__16(rest, _acc, stack, context, line, offset) do
     [acc | stack] = stack
     parse__13(rest, acc, stack, context, line, offset)
   end
@@ -404,7 +414,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__20(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__21(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__21(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__20(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -451,6 +461,8 @@ defmodule CalendarRecurrence.RRULE.Parser do
          inner_line,
          inner_offset
        ) do
+    _ = {rest, acc, context, line, offset}
+
     parse__19(
       inner_rest,
       [],
@@ -462,6 +474,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__22(rest, user_acc, [acc | stack], context, line, offset) do
+    _ = user_acc
     parse__23(rest, [:lists.reverse(user_acc)] ++ acc, stack, context, line, offset)
   end
 
@@ -694,7 +707,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__27(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__28(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__27(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -725,7 +738,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__28(rest, [0] ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
-  defp parse__27(rest, acc, stack, context, line, offset) do
+  defp parse__27(rest, _acc, stack, context, line, offset) do
     [acc | stack] = stack
     parse__24(rest, acc, stack, context, line, offset)
   end
@@ -951,7 +964,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__31(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__32(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__31(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -998,6 +1011,8 @@ defmodule CalendarRecurrence.RRULE.Parser do
          inner_line,
          inner_offset
        ) do
+    _ = {rest, acc, context, line, offset}
+
     parse__30(
       inner_rest,
       [],
@@ -1009,6 +1024,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__33(rest, user_acc, [acc | stack], context, line, offset) do
+    _ = user_acc
     parse__34(rest, [:lists.reverse(user_acc)] ++ acc, stack, context, line, offset)
   end
 
@@ -1241,7 +1257,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__38(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__39(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__38(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -1272,7 +1288,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__39(rest, [0] ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
-  defp parse__38(rest, acc, stack, context, line, offset) do
+  defp parse__38(rest, _acc, stack, context, line, offset) do
     [acc | stack] = stack
     parse__35(rest, acc, stack, context, line, offset)
   end
@@ -1498,7 +1514,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__42(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__43(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__42(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -1545,6 +1561,8 @@ defmodule CalendarRecurrence.RRULE.Parser do
          inner_line,
          inner_offset
        ) do
+    _ = {rest, acc, context, line, offset}
+
     parse__41(
       inner_rest,
       [],
@@ -1556,6 +1574,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__44(rest, user_acc, [acc | stack], context, line, offset) do
+    _ = user_acc
     parse__45(rest, [:lists.reverse(user_acc)] ++ acc, stack, context, line, offset)
   end
 
@@ -1579,17 +1598,17 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__49(rest, [], [acc | stack], context, line, offset)
   end
 
-  defp parse__49(<<x0::integer, rest::binary>>, acc, stack, context, comb__line, comb__offset)
+  defp parse__49(<<x0, rest::binary>>, acc, stack, context, comb__line, comb__offset)
        when x0 >= 48 and x0 <= 57 do
-    parse__50(rest, [(x0 - 48) * 1] ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__50(rest, [x0 - 48] ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
-  defp parse__49(rest, acc, stack, context, line, offset) do
+  defp parse__49(rest, _acc, stack, context, line, offset) do
     [acc | stack] = stack
     parse__46(rest, acc, stack, context, line, offset)
   end
 
-  defp parse__50(<<x0::integer, rest::binary>>, acc, stack, context, comb__line, comb__offset)
+  defp parse__50(<<x0, rest::binary>>, acc, stack, context, comb__line, comb__offset)
        when x0 >= 48 and x0 <= 57 do
     parse__52(rest, [x0] ++ acc, stack, context, comb__line, comb__offset + 1)
   end
@@ -1603,6 +1622,8 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__51(rest, user_acc, [acc | stack], context, line, offset) do
+    _ = user_acc
+
     parse__53(
       rest,
       (
@@ -1636,17 +1657,17 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__57(rest, [], [acc | stack], context, line, offset)
   end
 
-  defp parse__57(<<x0::integer, rest::binary>>, acc, stack, context, comb__line, comb__offset)
+  defp parse__57(<<x0, rest::binary>>, acc, stack, context, comb__line, comb__offset)
        when x0 >= 48 and x0 <= 57 do
-    parse__58(rest, [(x0 - 48) * 1] ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__58(rest, [x0 - 48] ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
-  defp parse__57(rest, acc, stack, context, line, offset) do
+  defp parse__57(rest, _acc, stack, context, line, offset) do
     [acc | stack] = stack
     parse__54(rest, acc, stack, context, line, offset)
   end
 
-  defp parse__58(<<x0::integer, rest::binary>>, acc, stack, context, comb__line, comb__offset)
+  defp parse__58(<<x0, rest::binary>>, acc, stack, context, comb__line, comb__offset)
        when x0 >= 48 and x0 <= 57 do
     parse__60(rest, [x0] ++ acc, stack, context, comb__line, comb__offset + 1)
   end
@@ -1660,6 +1681,8 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__59(rest, user_acc, [acc | stack], context, line, offset) do
+    _ = user_acc
+
     parse__61(
       rest,
       (
@@ -1697,19 +1720,12 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__72(rest, [], [{rest, context, line, offset}, acc | stack], context, line, offset)
   end
 
-  defp parse__67(
-         <<x0::integer, x1::integer, x2::integer, x3::integer, rest::binary>>,
-         acc,
-         stack,
-         context,
-         comb__line,
-         comb__offset
-       )
+  defp parse__67(<<x0, x1, x2, x3, rest::binary>>, acc, stack, context, comb__line, comb__offset)
        when x0 >= 48 and x0 <= 57 and (x1 >= 48 and x1 <= 57) and (x2 >= 48 and x2 <= 57) and
               (x3 >= 48 and x3 <= 57) do
     parse__68(
       rest,
-      [(x3 - 48) * 1 + (x2 - 48) * 10 + (x1 - 48) * 100 + (x0 - 48) * 1000] ++ acc,
+      [x3 - 48 + (x2 - 48) * 10 + (x1 - 48) * 100 + (x0 - 48) * 1000] ++ acc,
       stack,
       context,
       comb__line,
@@ -1717,7 +1733,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
     )
   end
 
-  defp parse__67(rest, acc, stack, context, line, offset) do
+  defp parse__67(rest, _acc, stack, context, line, offset) do
     [_, _, acc | stack] = stack
     parse__62(rest, acc, stack, context, line, offset)
   end
@@ -1747,7 +1763,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__68(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__69(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__69(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__68(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -1770,7 +1786,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__69(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
-  defp parse__68(rest, acc, stack, context, line, offset) do
+  defp parse__68(rest, _acc, stack, context, line, offset) do
     [_, _, acc | stack] = stack
     parse__62(rest, acc, stack, context, line, offset)
   end
@@ -1800,7 +1816,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__69(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__70(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__70(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__69(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -1899,7 +1915,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__70(rest, [31] ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
-  defp parse__69(rest, acc, stack, context, line, offset) do
+  defp parse__69(rest, _acc, stack, context, line, offset) do
     [_, _, acc | stack] = stack
     parse__62(rest, acc, stack, context, line, offset)
   end
@@ -1912,19 +1928,12 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__67(rest, [], stack, context, line, offset)
   end
 
-  defp parse__72(
-         <<x0::integer, x1::integer, x2::integer, x3::integer, rest::binary>>,
-         acc,
-         stack,
-         context,
-         comb__line,
-         comb__offset
-       )
+  defp parse__72(<<x0, x1, x2, x3, rest::binary>>, acc, stack, context, comb__line, comb__offset)
        when x0 >= 48 and x0 <= 57 and (x1 >= 48 and x1 <= 57) and (x2 >= 48 and x2 <= 57) and
               (x3 >= 48 and x3 <= 57) do
     parse__73(
       rest,
-      [(x3 - 48) * 1 + (x2 - 48) * 10 + (x1 - 48) * 100 + (x0 - 48) * 1000] ++ acc,
+      [x3 - 48 + (x2 - 48) * 10 + (x1 - 48) * 100 + (x0 - 48) * 1000] ++ acc,
       stack,
       context,
       comb__line,
@@ -1961,7 +1970,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__73(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__74(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__74(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__73(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -2013,7 +2022,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__74(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__75(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__75(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__74(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -2153,7 +2162,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__76(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__77(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__77(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__76(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -2253,7 +2262,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__77(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -2497,7 +2506,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__78(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -2717,6 +2726,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__66(rest, user_acc, [acc | stack], context, line, offset) do
+    _ = user_acc
     parse__80(rest, [:lists.reverse(user_acc)] ++ acc, stack, context, line, offset)
   end
 
@@ -2792,7 +2802,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__90(rest, ["BYDAY"] ++ acc, stack, context, comb__line, comb__offset + 6)
   end
 
-  defp parse__89(rest, acc, stack, context, line, offset) do
+  defp parse__89(rest, _acc, stack, context, line, offset) do
     [_, acc | stack] = stack
     parse__85(rest, acc, stack, context, line, offset)
   end
@@ -2829,7 +2839,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__92(rest, ["SA"] ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
-  defp parse__91(rest, acc, stack, context, line, offset) do
+  defp parse__91(rest, _acc, stack, context, line, offset) do
     [_, _, acc | stack] = stack
     parse__85(rest, acc, stack, context, line, offset)
   end
@@ -2890,6 +2900,8 @@ defmodule CalendarRecurrence.RRULE.Parser do
          inner_line,
          inner_offset
        ) do
+    _ = {rest, acc, context, line, offset}
+
     parse__94(
       inner_rest,
       [],
@@ -2901,6 +2913,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__97(rest, user_acc, [acc | stack], context, line, offset) do
+    _ = user_acc
     parse__98(rest, [:lists.reverse(user_acc)] ++ acc, stack, context, line, offset)
   end
 
@@ -2989,7 +3002,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__102(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__103(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__103(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__102(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -3020,7 +3033,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__103(rest, [0] ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
-  defp parse__102(rest, acc, stack, context, line, offset) do
+  defp parse__102(rest, _acc, stack, context, line, offset) do
     [acc | stack] = stack
     parse__99(rest, acc, stack, context, line, offset)
   end
@@ -3102,7 +3115,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__106(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__107(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__107(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__106(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -3149,6 +3162,8 @@ defmodule CalendarRecurrence.RRULE.Parser do
          inner_line,
          inner_offset
        ) do
+    _ = {rest, acc, context, line, offset}
+
     parse__105(
       inner_rest,
       [],
@@ -3160,6 +3175,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__108(rest, user_acc, [acc | stack], context, line, offset) do
+    _ = user_acc
     parse__109(rest, [:lists.reverse(user_acc)] ++ acc, stack, context, line, offset)
   end
 
@@ -3399,7 +3415,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__113(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__114(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__113(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -3430,7 +3446,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__114(rest, [0] ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
-  defp parse__113(rest, acc, stack, context, line, offset) do
+  defp parse__113(rest, _acc, stack, context, line, offset) do
     [acc | stack] = stack
     parse__110(rest, acc, stack, context, line, offset)
   end
@@ -3656,7 +3672,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__117(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__118(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__117(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -3703,6 +3719,8 @@ defmodule CalendarRecurrence.RRULE.Parser do
          inner_line,
          inner_offset
        ) do
+    _ = {rest, acc, context, line, offset}
+
     parse__116(
       inner_rest,
       [],
@@ -3714,6 +3732,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__119(rest, user_acc, [acc | stack], context, line, offset) do
+    _ = user_acc
     parse__120(rest, [:lists.reverse(user_acc)] ++ acc, stack, context, line, offset)
   end
 
@@ -3953,7 +3972,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__124(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__125(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__124(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -3984,7 +4003,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__125(rest, [0] ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
-  defp parse__124(rest, acc, stack, context, line, offset) do
+  defp parse__124(rest, _acc, stack, context, line, offset) do
     [acc | stack] = stack
     parse__121(rest, acc, stack, context, line, offset)
   end
@@ -4210,7 +4229,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__128(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__129(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__128(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -4257,6 +4276,8 @@ defmodule CalendarRecurrence.RRULE.Parser do
          inner_line,
          inner_offset
        ) do
+    _ = {rest, acc, context, line, offset}
+
     parse__127(
       inner_rest,
       [],
@@ -4268,6 +4289,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__130(rest, user_acc, [acc | stack], context, line, offset) do
+    _ = user_acc
     parse__131(rest, [:lists.reverse(user_acc)] ++ acc, stack, context, line, offset)
   end
 
@@ -4298,17 +4320,17 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__135(rest, [], [acc | stack], context, line, offset)
   end
 
-  defp parse__135(<<x0::integer, rest::binary>>, acc, stack, context, comb__line, comb__offset)
+  defp parse__135(<<x0, rest::binary>>, acc, stack, context, comb__line, comb__offset)
        when x0 >= 48 and x0 <= 57 do
-    parse__136(rest, [(x0 - 48) * 1] ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__136(rest, [x0 - 48] ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
-  defp parse__135(rest, acc, stack, context, line, offset) do
+  defp parse__135(rest, _acc, stack, context, line, offset) do
     [acc | stack] = stack
     parse__132(rest, acc, stack, context, line, offset)
   end
 
-  defp parse__136(<<x0::integer, rest::binary>>, acc, stack, context, comb__line, comb__offset)
+  defp parse__136(<<x0, rest::binary>>, acc, stack, context, comb__line, comb__offset)
        when x0 >= 48 and x0 <= 57 do
     parse__138(rest, [x0] ++ acc, stack, context, comb__line, comb__offset + 1)
   end
@@ -4322,6 +4344,8 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__137(rest, user_acc, [acc | stack], context, line, offset) do
+    _ = user_acc
+
     parse__139(
       rest,
       (
@@ -4355,17 +4379,17 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__143(rest, [], [acc | stack], context, line, offset)
   end
 
-  defp parse__143(<<x0::integer, rest::binary>>, acc, stack, context, comb__line, comb__offset)
+  defp parse__143(<<x0, rest::binary>>, acc, stack, context, comb__line, comb__offset)
        when x0 >= 48 and x0 <= 57 do
-    parse__144(rest, [(x0 - 48) * 1] ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__144(rest, [x0 - 48] ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
-  defp parse__143(rest, acc, stack, context, line, offset) do
+  defp parse__143(rest, _acc, stack, context, line, offset) do
     [acc | stack] = stack
     parse__140(rest, acc, stack, context, line, offset)
   end
 
-  defp parse__144(<<x0::integer, rest::binary>>, acc, stack, context, comb__line, comb__offset)
+  defp parse__144(<<x0, rest::binary>>, acc, stack, context, comb__line, comb__offset)
        when x0 >= 48 and x0 <= 57 do
     parse__146(rest, [x0] ++ acc, stack, context, comb__line, comb__offset + 1)
   end
@@ -4379,6 +4403,8 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__145(rest, user_acc, [acc | stack], context, line, offset) do
+    _ = user_acc
+
     parse__147(
       rest,
       (
@@ -4416,19 +4442,12 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__158(rest, [], [{rest, context, line, offset}, acc | stack], context, line, offset)
   end
 
-  defp parse__153(
-         <<x0::integer, x1::integer, x2::integer, x3::integer, rest::binary>>,
-         acc,
-         stack,
-         context,
-         comb__line,
-         comb__offset
-       )
+  defp parse__153(<<x0, x1, x2, x3, rest::binary>>, acc, stack, context, comb__line, comb__offset)
        when x0 >= 48 and x0 <= 57 and (x1 >= 48 and x1 <= 57) and (x2 >= 48 and x2 <= 57) and
               (x3 >= 48 and x3 <= 57) do
     parse__154(
       rest,
-      [(x3 - 48) * 1 + (x2 - 48) * 10 + (x1 - 48) * 100 + (x0 - 48) * 1000] ++ acc,
+      [x3 - 48 + (x2 - 48) * 10 + (x1 - 48) * 100 + (x0 - 48) * 1000] ++ acc,
       stack,
       context,
       comb__line,
@@ -4436,7 +4455,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
     )
   end
 
-  defp parse__153(rest, acc, stack, context, line, offset) do
+  defp parse__153(rest, _acc, stack, context, line, offset) do
     [_, _, acc | stack] = stack
     parse__148(rest, acc, stack, context, line, offset)
   end
@@ -4466,7 +4485,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__154(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__155(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__155(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__154(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -4489,7 +4508,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__155(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
-  defp parse__154(rest, acc, stack, context, line, offset) do
+  defp parse__154(rest, _acc, stack, context, line, offset) do
     [_, _, acc | stack] = stack
     parse__148(rest, acc, stack, context, line, offset)
   end
@@ -4519,7 +4538,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__155(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__156(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__156(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__155(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -4618,7 +4637,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__156(rest, [31] ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
-  defp parse__155(rest, acc, stack, context, line, offset) do
+  defp parse__155(rest, _acc, stack, context, line, offset) do
     [_, _, acc | stack] = stack
     parse__148(rest, acc, stack, context, line, offset)
   end
@@ -4631,19 +4650,12 @@ defmodule CalendarRecurrence.RRULE.Parser do
     parse__153(rest, [], stack, context, line, offset)
   end
 
-  defp parse__158(
-         <<x0::integer, x1::integer, x2::integer, x3::integer, rest::binary>>,
-         acc,
-         stack,
-         context,
-         comb__line,
-         comb__offset
-       )
+  defp parse__158(<<x0, x1, x2, x3, rest::binary>>, acc, stack, context, comb__line, comb__offset)
        when x0 >= 48 and x0 <= 57 and (x1 >= 48 and x1 <= 57) and (x2 >= 48 and x2 <= 57) and
               (x3 >= 48 and x3 <= 57) do
     parse__159(
       rest,
-      [(x3 - 48) * 1 + (x2 - 48) * 10 + (x1 - 48) * 100 + (x0 - 48) * 1000] ++ acc,
+      [x3 - 48 + (x2 - 48) * 10 + (x1 - 48) * 100 + (x0 - 48) * 1000] ++ acc,
       stack,
       context,
       comb__line,
@@ -4680,7 +4692,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__159(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__160(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__160(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__159(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -4732,7 +4744,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__160(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__161(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__161(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__160(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -4872,7 +4884,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__162(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__163(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__163(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__162(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -4972,7 +4984,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__163(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -5216,7 +5228,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__164(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, [7] ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -5436,6 +5448,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__152(rest, user_acc, [acc | stack], context, line, offset) do
+    _ = user_acc
     parse__166(rest, [:lists.reverse(user_acc)] ++ acc, stack, context, line, offset)
   end
 
@@ -5503,6 +5516,8 @@ defmodule CalendarRecurrence.RRULE.Parser do
          inner_line,
          inner_offset
        ) do
+    _ = {rest, acc, context, line, offset}
+
     parse__86(
       inner_rest,
       [],
@@ -5514,6 +5529,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__171(rest, user_acc, [acc | stack], context, line, offset) do
+    _ = user_acc
     parse__172(rest, [to_map(:lists.reverse(user_acc))] ++ acc, stack, context, line, offset)
   end
 
@@ -5540,7 +5556,9 @@ defmodule CalendarRecurrence.RRULE.Parser do
 
   defp cast_value("UNTIL", [year, month, day, hour, minute, second]) do
     {:ok, naive_datetime} = NaiveDateTime.new(year, month, day, hour, minute, second)
-    naive_datetime
+    {:ok, datetime} = DateTime.from_naive(naive_datetime, "Etc/UTC")
+
+    datetime
   end
 
   defp cast_value("BYDAY", days), do: Enum.map(days, &cast_byday/1)
