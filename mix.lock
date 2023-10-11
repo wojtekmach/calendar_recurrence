@@ -1,4 +1,4 @@
 %{
   "calendar_interval": {:git, "https://github.com/wojtekmach/calendar_interval.git", "4d2d30dc3170bc26cfd777780595f29e242d37b3", []},
-  "nimble_parsec": {:hex, :nimble_parsec, "0.3.1", "46dc75ec7c8a41d1e09e9ed6ad8a4dd242ce5b4f886f410fd5f0ee0c3a29cae9", [:mix], [], "hexpm"},
+  "nimble_parsec": {:hex, :nimble_parsec, "1.3.1", "2c54013ecf170e249e9291ed0a62e5832f70a476c61da16f6aac6dca0189f2af", [:mix], [], "hexpm", "2682e3c0b2eb58d90c6375fc0cc30bc7be06f365bf72608804fb9cffa5e1b167"},
 }

@@ -114,6 +114,16 @@ defimpl CalendarRecurrence.T, for: Date do
   def diff(date, step, _unit), do: Date.diff(date, step)
 end
 
+defimpl CalendarRecurrence.T, for: NaiveDateTime do
+  def continue?(date1, date2) do
+    NaiveDateTime.compare(date1, date2) in [:lt, :eq]
+  end
+
+  defdelegate add(date1, date2, unit), to: NaiveDateTime
+
+  defdelegate diff(date1, date2, unit), to: NaiveDateTime
+end
+
 defimpl CalendarRecurrence.T, for: DateTime do
   def continue?(date1, date2) do
     DateTime.compare(date1, date2) in [:lt, :eq]

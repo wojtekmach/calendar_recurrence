@@ -6,7 +6,7 @@ defmodule CalendarRecurrence.RRULETest do
   test "parse/1" do
     {:ok, %RRULE{freq: :daily}} = RRULE.parse("FREQ=DAILY")
 
-    {:ok, %RRULE{freq: :daily, until: ~N[2018-01-02 10:20:30]}} =
+    {:ok, %RRULE{freq: :daily, until: ~U[2018-01-02 10:20:30Z]}} =
       RRULE.parse("FREQ=DAILY;UNTIL=20180102T102030")
 
     {:ok, %RRULE{freq: :daily, until: ~D[2018-01-02]}} = RRULE.parse("FREQ=DAILY;UNTIL=20180102")
@@ -56,6 +56,94 @@ defmodule CalendarRecurrence.RRULETest do
 
     assert Enum.to_list(
              RRULE.to_recurrence(%RRULE{freq: :daily, until: ~D[2018-01-03]}, ~D[2018-01-01])
+           ) == [
+             ~D[2018-01-01],
+             ~D[2018-01-02],
+             ~D[2018-01-03]
+           ]
+
+    assert Enum.to_list(
+             RRULE.to_recurrence(
+               %RRULE{freq: :daily, until: ~D[2018-01-03]},
+               ~N[2018-01-01 10:00:00]
+             )
+           ) == [
+             ~N[2018-01-01 10:00:00],
+             ~N[2018-01-02 10:00:00],
+             ~N[2018-01-03 10:00:00]
+           ]
+
+    assert Enum.to_list(
+             RRULE.to_recurrence(
+               %RRULE{freq: :daily, until: ~D[2018-01-03]},
+               ~U[2018-01-01 10:00:00Z]
+             )
+           ) == [
+             ~U[2018-01-01 10:00:00Z],
+             ~U[2018-01-02 10:00:00Z],
+             ~U[2018-01-03 10:00:00Z]
+           ]
+
+    assert Enum.to_list(
+             RRULE.to_recurrence(
+               %RRULE{freq: :daily, until: ~N[2018-01-03 10:00:00]},
+               ~N[2018-01-01 10:00:00]
+             )
+           ) == [
+             ~N[2018-01-01 10:00:00],
+             ~N[2018-01-02 10:00:00],
+             ~N[2018-01-03 10:00:00]
+           ]
+
+    assert Enum.to_list(
+             RRULE.to_recurrence(
+               %RRULE{freq: :daily, until: ~N[2018-01-03 10:00:00]},
+               ~D[2018-01-01]
+             )
+           ) == [
+             ~D[2018-01-01],
+             ~D[2018-01-02],
+             ~D[2018-01-03]
+           ]
+
+    assert Enum.to_list(
+             RRULE.to_recurrence(
+               %RRULE{freq: :daily, until: ~N[2018-01-03 10:00:00]},
+               ~U[2018-01-01 10:00:00Z]
+             )
+           ) == [
+             ~U[2018-01-01 10:00:00Z],
+             ~U[2018-01-02 10:00:00Z],
+             ~U[2018-01-03 10:00:00Z]
+           ]
+
+    assert Enum.to_list(
+             RRULE.to_recurrence(
+               %RRULE{freq: :daily, until: ~U[2018-01-03 10:00:00Z]},
+               ~U[2018-01-01 10:00:00Z]
+             )
+           ) == [
+             ~U[2018-01-01 10:00:00Z],
+             ~U[2018-01-02 10:00:00Z],
+             ~U[2018-01-03 10:00:00Z]
+           ]
+
+    assert Enum.to_list(
+             RRULE.to_recurrence(
+               %RRULE{freq: :daily, until: ~U[2018-01-03 10:00:00Z]},
+               ~N[2018-01-01 10:00:00]
+             )
+           ) == [
+             ~N[2018-01-01 10:00:00],
+             ~N[2018-01-02 10:00:00],
+             ~N[2018-01-03 10:00:00]
+           ]
+
+    assert Enum.to_list(
+             RRULE.to_recurrence(
+               %RRULE{freq: :daily, until: ~U[2018-01-03 10:00:00Z]},
+               ~D[2018-01-01]
+             )
            ) == [
              ~D[2018-01-01],
              ~D[2018-01-02],
