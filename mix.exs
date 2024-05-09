@@ -9,7 +9,7 @@ defmodule CalendarRecurrence.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       aliases: aliases(),
-      source_url: "https://github.com/wojtekmach/calendar_recurrence",
+      source_url: "https://github.com/wojtekmach/calendar_recurrence"
     ]
   end
 
