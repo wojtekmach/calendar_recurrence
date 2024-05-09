@@ -8,7 +8,8 @@ defmodule CalendarRecurrence.MixProject do
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      aliases: aliases()
+      aliases: aliases(),
+      source_url: "https://github.com/wojtekmach/calendar_recurrence",
     ]
   end
 
