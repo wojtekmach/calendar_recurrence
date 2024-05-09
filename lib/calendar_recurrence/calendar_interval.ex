@@ -9,6 +9,7 @@ if Code.ensure_loaded?(CalendarInterval) do
       :day = interval1.precision
       CalendarInterval.relation(interval1, interval2) in [:preceds, :meets, :equal]
     end
-    def diff(_,_,_), do: raise "diff/3 not implemented for CalendarInterval"
+
+    def diff(_, _, _), do: raise("diff/3 not implemented for CalendarInterval")
   end
 end
