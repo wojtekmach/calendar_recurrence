@@ -119,7 +119,7 @@ defimpl CalendarRecurrence.T, for: NaiveDateTime do
     NaiveDateTime.compare(date1, date2) in [:lt, :eq]
   end
 
-  defdelegate add(date1, date2, unit), to: NaiveDateTime
+  defdelegate add(date, step, unit), to: NaiveDateTime
 
   defdelegate diff(date1, date2, unit), to: NaiveDateTime
 end
@@ -129,7 +129,34 @@ defimpl CalendarRecurrence.T, for: DateTime do
     DateTime.compare(date1, date2) in [:lt, :eq]
   end
 
-  defdelegate add(date1, date2, unit), to: DateTime
+  # defdelegate add(date, step, unit), to: DateTime
+  def add(date, step, unit) do
+    if date.time_zone == "Etc/UTC" do
+      DateTime.add(date, step, unit)
+    else
+      DateTime.to_naive(date)
+      |> NaiveDateTime.add(step, unit)
+      |> dt_from_naive(step, unit, date.time_zone)
+    end
+  end
 
   defdelegate diff(date1, date2, unit), to: DateTime
+
+  defp dt_from_naive(%NaiveDateTime{} = ndt, step, unit, timezone) do
+    case DateTime.from_naive(ndt, timezone) do
+      {:ok, dt} ->
+        dt
+
+      {:ambiguous, first_dt, _second_dt} ->
+        first_dt
+
+      # step over gap
+      {:gap, _, _} ->
+        ndt |> NaiveDateTime.add(step, unit) |> dt_from_naive(step, unit, timezone)
+
+      {:error, reason} ->
+        raise ArgumentError,
+              "Could not convert date #{ndt} to DateTime with timezone #{timezone}, reason: #{reason}"
+    end
+  end
 end
