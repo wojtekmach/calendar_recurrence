@@ -277,31 +277,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__16(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__17(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__17(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__16(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__17(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__17(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__16(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__17(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__17(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__16(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__17(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__17(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__16(<<"9", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__17(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__17(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__16(<<"8", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__17(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__17(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__16(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__17(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__17(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__16(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -390,31 +390,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__20(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__21(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__21(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__20(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__21(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__21(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__20(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__21(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__21(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__20(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__21(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__21(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__20(<<"9", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__21(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__21(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__20(<<"8", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__21(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__21(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__20(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__21(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__21(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__20(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -499,115 +499,115 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__27(<<"59", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, ';' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c";" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"58", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, ':' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c":" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"57", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '9' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"9" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"56", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '8' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"8" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"55", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '7' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"7" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"54", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '6' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"6" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"53", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '5' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"5" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"52", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '4' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"4" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"51", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '3' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"3" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"50", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '2' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"2" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"49", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '1' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"1" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"48", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '0' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"0" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"47", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '/' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"/" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"46", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '.' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"." ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"45", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '-' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"-" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"44", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, ',' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"," ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"43", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '+' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"+" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"42", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '*' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"*" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"41", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, ')' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c")" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"40", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '(' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"(" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"39", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '\'' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"'" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"38", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '&' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"&" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"37", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '%' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"%" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"36", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '$' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"$" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"35", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '#' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"#" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"34", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '"' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c'"' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"33", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '!' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"!" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"32", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, ' ' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c" " ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"31", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -627,7 +627,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__27(<<"27", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '\e' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"\e" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"26", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -683,31 +683,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__27(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__28(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__27(<<"9", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__28(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__27(<<"8", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__28(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__27(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__28(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__28(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__27(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -756,115 +756,115 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__31(<<"59", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, ';' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c";" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"58", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, ':' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c":" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"57", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '9' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"9" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"56", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '8' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"8" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"55", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '7' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"7" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"54", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '6' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"6" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"53", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '5' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"5" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"52", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '4' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"4" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"51", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '3' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"3" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"50", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '2' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"2" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"49", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '1' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"1" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"48", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '0' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"0" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"47", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '/' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"/" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"46", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '.' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"." ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"45", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '-' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"-" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"44", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, ',' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"," ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"43", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '+' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"+" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"42", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '*' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"*" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"41", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, ')' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c")" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"40", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '(' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"(" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"39", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '\'' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"'" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"38", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '&' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"&" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"37", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '%' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"%" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"36", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '$' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"$" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"35", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '#' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"#" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"34", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '"' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c'"' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"33", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '!' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"!" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"32", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, ' ' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c" " ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"31", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -884,7 +884,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__31(<<"27", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '\e' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"\e" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"26", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -940,31 +940,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__31(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__32(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__31(<<"9", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__32(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__31(<<"8", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__32(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__31(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__32(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__32(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__31(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -1049,115 +1049,115 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__38(<<"59", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, ';' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c";" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"58", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, ':' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c":" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"57", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '9' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"9" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"56", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '8' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"8" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"55", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '7' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"7" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"54", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '6' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"6" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"53", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '5' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"5" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"52", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '4' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"4" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"51", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '3' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"3" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"50", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '2' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"2" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"49", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '1' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"1" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"48", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '0' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"0" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"47", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '/' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"/" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"46", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '.' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"." ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"45", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '-' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"-" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"44", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, ',' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"," ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"43", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '+' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"+" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"42", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '*' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"*" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"41", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, ')' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c")" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"40", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '(' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"(" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"39", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '\'' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"'" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"38", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '&' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"&" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"37", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '%' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"%" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"36", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '$' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"$" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"35", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '#' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"#" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"34", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '"' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c'"' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"33", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '!' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"!" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"32", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, ' ' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c" " ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"31", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -1177,7 +1177,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__38(<<"27", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '\e' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"\e" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"26", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -1233,31 +1233,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__38(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__39(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__38(<<"9", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__39(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__38(<<"8", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__39(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__38(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__39(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__39(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__38(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -1306,115 +1306,115 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__42(<<"59", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, ';' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c";" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"58", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, ':' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c":" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"57", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '9' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"9" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"56", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '8' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"8" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"55", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '7' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"7" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"54", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '6' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"6" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"53", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '5' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"5" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"52", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '4' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"4" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"51", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '3' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"3" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"50", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '2' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"2" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"49", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '1' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"1" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"48", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '0' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"0" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"47", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '/' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"/" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"46", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '.' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"." ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"45", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '-' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"-" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"44", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, ',' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"," ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"43", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '+' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"+" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"42", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '*' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"*" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"41", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, ')' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c")" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"40", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '(' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"(" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"39", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '\'' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"'" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"38", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '&' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"&" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"37", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '%' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"%" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"36", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '$' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"$" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"35", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '#' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"#" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"34", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '"' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c'"' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"33", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '!' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"!" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"32", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, ' ' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c" " ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"31", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -1434,7 +1434,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__42(<<"27", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '\e' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"\e" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"26", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -1490,31 +1490,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__42(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__43(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__42(<<"9", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__43(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__42(<<"8", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__43(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__42(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__43(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__43(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__42(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -1763,27 +1763,27 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__68(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__69(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__69(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__68(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__69(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__69(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__68(<<"09", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__69(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__69(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__68(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__69(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__69(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__68(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__69(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__69(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__68(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__69(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__69(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__68(rest, _acc, stack, context, line, offset) do
@@ -1816,31 +1816,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__69(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__70(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__70(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__69(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__70(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__70(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__69(<<"09", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__70(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__70(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__69(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__70(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__70(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__69(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__70(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__70(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__69(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__70(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__70(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__69(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__70(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__70(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__69(<<"14", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -1896,7 +1896,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__69(<<"27", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__70(rest, '\e' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__70(rest, ~c"\e" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__69(<<"28", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -1970,27 +1970,27 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__73(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__74(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__74(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__73(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__74(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__74(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__73(<<"09", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__74(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__74(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__73(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__74(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__74(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__73(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__74(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__74(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__73(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__74(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__74(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__73(rest, acc, stack, context, line, offset) do
@@ -2022,31 +2022,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__74(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__75(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__75(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__74(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__75(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__75(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__74(<<"09", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__75(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__75(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__74(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__75(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__75(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__74(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__75(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__75(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__74(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__75(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__75(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__74(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__75(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__75(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__74(<<"14", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -2102,7 +2102,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__74(<<"27", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__75(rest, '\e' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__75(rest, ~c"\e" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__74(<<"28", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -2162,31 +2162,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__76(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__77(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__77(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__76(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__77(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__77(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__76(<<"09", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__77(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__77(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__76(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__77(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__77(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__76(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__77(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__77(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__76(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__77(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__77(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__76(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__77(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__77(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__76(<<"14", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -2262,31 +2262,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__77(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"09", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"14", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -2342,7 +2342,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__77(<<"27", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '\e' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"\e" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"28", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -2362,115 +2362,115 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__77(<<"32", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, ' ' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c" " ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"33", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '!' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"!" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"34", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '"' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c'"' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"35", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '#' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"#" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"36", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '$' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"$" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"37", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '%' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"%" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"38", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '&' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"&" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"39", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '\'' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"'" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"40", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '(' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"(" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"41", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, ')' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c")" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"42", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '*' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"*" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"43", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '+' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"+" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"44", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, ',' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"," ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"45", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '-' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"-" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"46", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '.' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"." ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"47", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '/' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"/" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"48", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '0' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"0" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"49", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '1' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"1" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"50", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '2' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"2" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"51", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '3' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"3" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"52", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '4' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"4" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"53", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '5' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"5" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"54", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '6' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"6" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"55", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '7' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"7" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"56", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '8' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"8" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"57", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, '9' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c"9" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"58", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, ':' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c":" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(<<"59", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__78(rest, ';' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__78(rest, ~c";" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__77(rest, acc, stack, context, line, offset) do
@@ -2506,31 +2506,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__78(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"09", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"14", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -2586,7 +2586,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__78(<<"27", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '\e' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"\e" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"28", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -2606,115 +2606,115 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__78(<<"32", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, ' ' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c" " ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"33", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '!' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"!" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"34", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '"' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c'"' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"35", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '#' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"#" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"36", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '$' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"$" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"37", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '%' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"%" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"38", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '&' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"&" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"39", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '\'' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"'" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"40", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '(' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"(" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"41", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, ')' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c")" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"42", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '*' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"*" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"43", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '+' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"+" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"44", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, ',' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"," ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"45", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '-' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"-" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"46", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '.' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"." ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"47", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '/' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"/" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"48", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '0' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"0" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"49", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '1' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"1" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"50", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '2' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"2" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"51", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '3' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"3" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"52", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '4' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"4" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"53", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '5' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"5" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"54", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '6' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"6" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"55", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '7' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"7" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"56", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '8' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"8" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"57", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, '9' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c"9" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"58", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, ':' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c":" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(<<"59", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__79(rest, ';' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__79(rest, ~c";" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__78(rest, acc, stack, context, line, offset) do
@@ -2978,31 +2978,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__102(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__103(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__103(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__102(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__103(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__103(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__102(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__103(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__103(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__102(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__103(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__103(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__102(<<"9", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__103(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__103(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__102(<<"8", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__103(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__103(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__102(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__103(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__103(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__102(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -3091,31 +3091,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__106(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__107(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__107(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__106(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__107(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__107(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__106(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__107(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__107(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__106(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__107(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__107(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__106(<<"9", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__107(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__107(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__106(<<"8", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__107(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__107(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__106(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__107(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__107(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__106(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -3207,115 +3207,115 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__113(<<"59", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, ';' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c";" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"58", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, ':' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c":" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"57", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '9' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"9" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"56", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '8' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"8" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"55", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '7' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"7" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"54", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '6' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"6" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"53", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '5' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"5" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"52", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '4' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"4" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"51", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '3' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"3" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"50", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '2' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"2" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"49", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '1' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"1" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"48", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '0' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"0" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"47", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '/' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"/" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"46", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '.' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"." ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"45", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '-' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"-" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"44", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, ',' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"," ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"43", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '+' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"+" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"42", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '*' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"*" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"41", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, ')' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c")" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"40", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '(' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"(" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"39", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '\'' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"'" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"38", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '&' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"&" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"37", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '%' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"%" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"36", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '$' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"$" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"35", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '#' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"#" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"34", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '"' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c'"' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"33", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '!' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"!" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"32", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, ' ' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c" " ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"31", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -3335,7 +3335,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__113(<<"27", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '\e' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"\e" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"26", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -3391,31 +3391,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__113(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__114(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__113(<<"9", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__114(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__113(<<"8", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__114(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__113(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__114(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__114(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__113(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -3464,115 +3464,115 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__117(<<"59", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, ';' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c";" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"58", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, ':' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c":" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"57", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '9' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"9" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"56", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '8' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"8" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"55", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '7' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"7" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"54", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '6' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"6" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"53", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '5' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"5" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"52", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '4' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"4" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"51", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '3' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"3" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"50", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '2' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"2" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"49", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '1' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"1" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"48", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '0' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"0" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"47", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '/' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"/" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"46", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '.' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"." ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"45", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '-' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"-" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"44", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, ',' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"," ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"43", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '+' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"+" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"42", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '*' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"*" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"41", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, ')' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c")" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"40", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '(' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"(" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"39", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '\'' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"'" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"38", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '&' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"&" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"37", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '%' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"%" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"36", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '$' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"$" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"35", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '#' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"#" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"34", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '"' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c'"' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"33", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '!' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"!" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"32", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, ' ' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c" " ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"31", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -3592,7 +3592,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__117(<<"27", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '\e' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"\e" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"26", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -3648,31 +3648,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__117(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__118(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__117(<<"9", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__118(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__117(<<"8", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__118(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__117(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__118(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__118(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__117(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -3764,115 +3764,115 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__124(<<"59", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, ';' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c";" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"58", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, ':' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c":" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"57", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '9' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"9" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"56", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '8' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"8" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"55", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '7' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"7" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"54", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '6' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"6" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"53", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '5' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"5" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"52", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '4' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"4" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"51", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '3' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"3" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"50", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '2' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"2" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"49", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '1' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"1" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"48", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '0' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"0" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"47", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '/' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"/" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"46", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '.' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"." ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"45", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '-' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"-" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"44", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, ',' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"," ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"43", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '+' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"+" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"42", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '*' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"*" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"41", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, ')' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c")" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"40", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '(' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"(" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"39", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '\'' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"'" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"38", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '&' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"&" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"37", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '%' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"%" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"36", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '$' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"$" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"35", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '#' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"#" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"34", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '"' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c'"' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"33", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '!' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"!" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"32", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, ' ' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c" " ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"31", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -3892,7 +3892,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__124(<<"27", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '\e' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"\e" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"26", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -3948,31 +3948,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__124(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__125(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__124(<<"9", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__125(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__124(<<"8", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__125(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__124(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__125(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__125(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__124(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -4021,115 +4021,115 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__128(<<"59", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, ';' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c";" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"58", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, ':' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c":" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"57", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '9' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"9" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"56", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '8' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"8" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"55", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '7' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"7" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"54", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '6' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"6" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"53", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '5' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"5" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"52", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '4' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"4" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"51", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '3' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"3" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"50", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '2' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"2" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"49", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '1' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"1" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"48", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '0' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"0" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"47", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '/' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"/" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"46", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '.' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"." ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"45", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '-' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"-" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"44", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, ',' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"," ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"43", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '+' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"+" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"42", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '*' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"*" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"41", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, ')' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c")" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"40", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '(' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"(" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"39", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '\'' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"'" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"38", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '&' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"&" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"37", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '%' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"%" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"36", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '$' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"$" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"35", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '#' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"#" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"34", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '"' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c'"' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"33", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '!' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"!" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"32", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, ' ' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c" " ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"31", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -4149,7 +4149,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__128(<<"27", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '\e' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"\e" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"26", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -4205,31 +4205,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__128(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__129(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__128(<<"9", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__129(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__128(<<"8", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__129(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__128(<<"7", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__129(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 1)
+    parse__129(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 1)
   end
 
   defp parse__128(<<"6", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -4485,27 +4485,27 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__154(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__155(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__155(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__154(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__155(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__155(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__154(<<"09", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__155(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__155(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__154(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__155(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__155(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__154(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__155(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__155(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__154(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__155(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__155(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__154(rest, _acc, stack, context, line, offset) do
@@ -4538,31 +4538,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__155(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__156(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__156(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__155(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__156(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__156(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__155(<<"09", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__156(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__156(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__155(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__156(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__156(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__155(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__156(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__156(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__155(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__156(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__156(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__155(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__156(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__156(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__155(<<"14", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -4618,7 +4618,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__155(<<"27", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__156(rest, '\e' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__156(rest, ~c"\e" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__155(<<"28", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -4692,27 +4692,27 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__159(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__160(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__160(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__159(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__160(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__160(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__159(<<"09", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__160(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__160(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__159(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__160(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__160(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__159(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__160(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__160(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__159(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__160(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__160(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__159(rest, acc, stack, context, line, offset) do
@@ -4744,31 +4744,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__160(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__161(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__161(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__160(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__161(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__161(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__160(<<"09", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__161(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__161(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__160(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__161(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__161(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__160(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__161(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__161(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__160(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__161(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__161(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__160(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__161(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__161(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__160(<<"14", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -4824,7 +4824,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__160(<<"27", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__161(rest, '\e' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__161(rest, ~c"\e" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__160(<<"28", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -4884,31 +4884,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__162(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__163(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__163(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__162(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__163(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__163(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__162(<<"09", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__163(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__163(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__162(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__163(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__163(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__162(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__163(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__163(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__162(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__163(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__163(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__162(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__163(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__163(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__162(<<"14", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -4984,31 +4984,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__163(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"09", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"14", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -5064,7 +5064,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__163(<<"27", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '\e' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"\e" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"28", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -5084,115 +5084,115 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__163(<<"32", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, ' ' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c" " ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"33", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '!' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"!" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"34", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '"' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c'"' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"35", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '#' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"#" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"36", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '$' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"$" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"37", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '%' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"%" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"38", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '&' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"&" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"39", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '\'' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"'" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"40", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '(' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"(" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"41", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, ')' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c")" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"42", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '*' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"*" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"43", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '+' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"+" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"44", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, ',' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"," ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"45", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '-' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"-" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"46", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '.' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"." ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"47", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '/' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"/" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"48", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '0' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"0" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"49", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '1' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"1" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"50", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '2' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"2" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"51", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '3' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"3" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"52", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '4' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"4" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"53", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '5' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"5" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"54", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '6' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"6" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"55", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '7' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"7" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"56", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '8' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"8" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"57", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, '9' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c"9" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"58", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, ':' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c":" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(<<"59", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__164(rest, ';' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__164(rest, ~c";" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__163(rest, acc, stack, context, line, offset) do
@@ -5228,31 +5228,31 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__164(<<"07", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '\a' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"\a" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"08", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '\b' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"\b" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"09", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '\t' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"\t" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"10", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '\n' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"\n" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"11", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '\v' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"\v" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"12", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '\f' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"\f" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"13", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '\r' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"\r" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"14", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -5308,7 +5308,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__164(<<"27", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '\e' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"\e" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"28", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
@@ -5328,115 +5328,115 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp parse__164(<<"32", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, ' ' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c" " ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"33", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '!' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"!" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"34", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '"' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c'"' ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"35", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '#' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"#" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"36", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '$' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"$" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"37", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '%' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"%" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"38", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '&' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"&" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"39", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '\'' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"'" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"40", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '(' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"(" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"41", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, ')' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c")" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"42", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '*' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"*" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"43", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '+' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"+" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"44", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, ',' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"," ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"45", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '-' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"-" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"46", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '.' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"." ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"47", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '/' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"/" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"48", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '0' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"0" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"49", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '1' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"1" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"50", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '2' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"2" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"51", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '3' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"3" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"52", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '4' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"4" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"53", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '5' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"5" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"54", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '6' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"6" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"55", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '7' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"7" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"56", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '8' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"8" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"57", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, '9' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c"9" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"58", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, ':' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c":" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(<<"59", rest::binary>>, acc, stack, context, comb__line, comb__offset) do
-    parse__165(rest, ';' ++ acc, stack, context, comb__line, comb__offset + 2)
+    parse__165(rest, ~c";" ++ acc, stack, context, comb__line, comb__offset + 2)
   end
 
   defp parse__164(rest, acc, stack, context, line, offset) do
