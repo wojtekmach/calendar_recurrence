@@ -9,6 +9,10 @@ defmodule CalendarRecurrence do
   - `unit`; The interval for each recurrence, Defaults to `:day`
   - `step`: The count of how many units to apply for each recurrence. Defaults to `1`
 
+  When the `:start` is an Elixir `DateTime` struct with a timezone other than "Etc/UTC" the recurrence will be calculated in that timezone,
+  so that the wall clock time is stable even when switching between summer and winter time. That means the time will be the same even when 
+  the day has a duration of 23h or 25h.
+
   ## Examples
 
       iex> recurrence = CalendarRecurrence.new(start: ~D[2018-01-01])
