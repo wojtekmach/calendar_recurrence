@@ -2,11 +2,34 @@ defmodule CalendarRecurrence do
   @moduledoc """
   Stream of recurring dates.
 
+  Options:
+
+  - `start`: The start of the recurrence
+  - `stop`: When to stop the recurrence. Defaults to `:never`
+  - `unit`; The interval for each recurrence, Defaults to `:day`
+  - `step`: The count of how many units to apply for each recurrence. Defaults to `1`
+
   ## Examples
 
       iex> recurrence = CalendarRecurrence.new(start: ~D[2018-01-01])
       iex> Enum.take(recurrence, 3)
       [~D[2018-01-01], ~D[2018-01-02], ~D[2018-01-03]]
+
+      iex> recurrence = CalendarRecurrence.new(start: ~N[2018-01-01 12:00:00])
+      iex> Enum.take(recurrence, 3)
+      [~N[2018-01-01 12:00:00], ~N[2018-01-02 12:00:00], ~N[2018-01-03 12:00:00]]
+
+      iex> recurrence = CalendarRecurrence.new(start: ~U[2018-01-01 12:00:00Z])
+      iex> Enum.take(recurrence, 3)
+      [~U[2018-01-01 12:00:00Z], ~U[2018-01-02 12:00:00Z], ~U[2018-01-03 12:00:00Z]]
+
+      iex> recurrence = CalendarRecurrence.new(start: ~U[2018-01-01 12:00:00Z], unit: :hour)
+      iex> Enum.take(recurrence, 3)
+      [~U[2018-01-01 12:00:00Z], ~U[2018-01-01 13:00:00Z], ~U[2018-01-01 14:00:00Z]]
+
+      iex> recurrence = CalendarRecurrence.new(start: ~U[2018-01-01 12:00:00Z], unit: :hour, step: 2)
+      iex> Enum.take(recurrence, 3)
+      [~U[2018-01-01 12:00:00Z], ~U[2018-01-01 14:00:00Z], ~U[2018-01-01 16:00:00Z]]
 
       iex> recurrence = CalendarRecurrence.new(start: ~D[2018-01-01], stop: {:count, 3})
       iex> Enum.to_list(recurrence)
@@ -19,7 +42,6 @@ defmodule CalendarRecurrence do
       iex> recurrence = CalendarRecurrence.new(start: ~D[2018-01-01], step: fn _ -> 2 end)
       iex> Enum.take(recurrence, 3)
       [~D[2018-01-01], ~D[2018-01-03], ~D[2018-01-05]]
-
   """
 
   @enforce_keys [:start]
@@ -29,14 +51,14 @@ defmodule CalendarRecurrence do
             stop: :never,
             unit: :day
 
-  @type date() :: Date.t() | CalendarRecurrence.T.t()
+  @type date() :: Date.t() | NaiveDateTime.t() | DateTime.t() | CalendarRecurrence.T.t()
 
   @type stepper() :: (current :: date() -> pos_integer())
 
   @type unit() :: :day | :hour | :minute | System.time_unit()
 
   @type t() :: %CalendarRecurrence{
-          start: Date.t(),
+          start: date(),
           stop: :never | {:until, date()} | {:count, non_neg_integer()},
           step: pos_integer() | stepper(),
           unit: unit()
@@ -129,15 +151,13 @@ defimpl CalendarRecurrence.T, for: DateTime do
     DateTime.compare(date1, date2) in [:lt, :eq]
   end
 
-  # defdelegate add(date, step, unit), to: DateTime
+  def add(%DateTime{time_zone: "Etc/UTC"} = date, step, unit), do: DateTime.add(date, step, unit)
+
   def add(date, step, unit) do
-    if date.time_zone == "Etc/UTC" do
-      DateTime.add(date, step, unit)
-    else
-      DateTime.to_naive(date)
-      |> NaiveDateTime.add(step, unit)
-      |> dt_from_naive(step, unit, date.time_zone)
-    end
+    date
+    |> DateTime.to_naive()
+    |> NaiveDateTime.add(step, unit)
+    |> dt_from_naive(step, unit, date.time_zone)
   end
 
   defdelegate diff(date1, date2, unit), to: DateTime
@@ -150,9 +170,10 @@ defimpl CalendarRecurrence.T, for: DateTime do
       {:ambiguous, first_dt, _second_dt} ->
         first_dt
 
-      # step over gap
-      {:gap, _, _} ->
-        ndt |> NaiveDateTime.add(step, unit) |> dt_from_naive(step, unit, timezone)
+      {:gap, _gap_start, _gap_end} ->
+        ndt
+        |> NaiveDateTime.add(step, unit)
+        |> dt_from_naive(step, unit, timezone)
 
       {:error, reason} ->
         raise ArgumentError,

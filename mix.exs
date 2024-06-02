@@ -23,6 +23,7 @@ defmodule CalendarRecurrence.MixProject do
     [
       {:nimble_parsec, "~> 1.3", only: [:dev, :test]},
       {:calendar_interval, "~> 0.2.0", optional: true},
+      {:ex_doc, "~> 0.31", only: :dev, runtime: false},
       {:tzdata, "~> 1.1", only: [:test]}
     ]
   end

@@ -128,11 +128,11 @@ defmodule CalendarRecurrenceTest do
     end
 
     @doc """
-    > Recurrence rules may generate recurrence instances with an invalid
-      date (e.g., February 30) or nonexistent local time (e.g., 1:30 AM
-      on a day where the local time is moved forward by an hour at 1:00
-      AM).  Such recurrence instances MUST be ignored and MUST NOT be
-      counted as part of the recurrence set.
+    Recurrence rules may generate recurrence instances with an invalid
+    date (e.g., February 30) or nonexistent local time (e.g., 1:30 AM
+    on a day where the local time is moved forward by an hour at 1:00
+    AM).  Such recurrence instances MUST be ignored and MUST NOT be
+    counted as part of the recurrence set.
 
     https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10
     """
@@ -154,23 +154,46 @@ defmodule CalendarRecurrenceTest do
              ) == :eq
     end
 
-    # TODO: If the computed local start time of a recurrence instance does not
-    # exist, or occurs more than once, for the specified time zone, the
-    # time of the recurrence instance is interpreted in the same manner
-    # as an explicit DATE-TIME value describing that date and time, as
-    # specified in Section 3.3.5.
-    # 3.3.5
-    # If, based on the definition of the referenced time zone, the local
-    # time described occurs more than once (when changing from daylight
-    # to standard time), the DATE-TIME value refers to the first
-    # occurrence of the referenced time.  Thus, TZID=America/
-    # New_York:20071104T013000 indicates November 4, 2007 at 1:30 A.M.
-    # EDT (UTC-04:00).  If the local time described does not occur (when
-    # changing from standard to daylight time), the DATE-TIME value is
-    # interpreted using the UTC offset before the gap in local times.
-    # Thus, TZID=America/New_York:20070311T023000 indicates March 11,
-    # 2007 at 3:30 A.M. EDT (UTC-04:00), one hour after 1:30 A.M. EST
-    # (UTC-05:00).
-    # https://stackoverflow.com/questions/68617234/how-are-nonexistant-timestamps-due-to-dst-handled-in-icalendar-recurrence-rules
+    @doc """
+    If the computed local start time of a recurrence instance does not
+    exist, or occurs more than once, for the specified time zone, the
+    time of the recurrence instance is interpreted in the same manner
+    as an explicit DATE-TIME value describing that date and time, as
+    specified in Section 3.3.5.
+
+    ###3.3.5
+
+    If, based on the definition of the referenced time zone, the local
+    time described occurs more than once (when changing from daylight
+    to standard time), the DATE-TIME value refers to the first
+    occurrence of the referenced time.  Thus, TZID=America/
+    New_York:20071104T013000 indicates November 4, 2007 at 1:30 A.M.
+    EDT (UTC-04:00).  If the local time described does not occur (when
+    changing from standard to daylight time), the DATE-TIME value is
+    interpreted using the UTC offset before the gap in local times.
+    Thus, TZID=America/New_York:20070311T023000 indicates March 11,
+    2007 at 3:30 A.M. EDT (UTC-04:00), one hour after 1:30 A.M. EST
+    (UTC-05:00).
+    https://stackoverflow.com/questions/68617234/how-are-nonexistant-timestamps-due-to-dst-handled-in-icalendar-recurrence-rules
+    """
+
+    test "on ambiguous date choose first datetime" do
+      dt = DateTime.new!(~D[2024-10-26], ~T[02:00:00], "Europe/Berlin")
+
+      [datetime1, datetime2] =
+        CalendarRecurrence.new(start: dt, stop: {:count, 2})
+        |> Enum.to_list()
+
+      assert DateTime.compare(
+               datetime1,
+               DateTime.new!(~D[2024-10-26], ~T[02:00:00], "Europe/Berlin")
+             ) == :eq
+
+      {:ambiguous, first_dt, second_dt} =
+        DateTime.new(~D[2024-10-27], ~T[02:00:00], "Europe/Berlin")
+
+      assert DateTime.compare(datetime2, first_dt) == :eq
+      assert DateTime.compare(datetime2, second_dt) != :eq
+    end
   end
 end
