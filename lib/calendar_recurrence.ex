@@ -6,7 +6,7 @@ defmodule CalendarRecurrence do
 
   - `start`: The start of the recurrence
   - `stop`: When to stop the recurrence. Defaults to `:never`
-  - `unit`; The interval for each recurrence, Defaults to `:day`
+  - `unit`: The interval for each recurrence, Defaults to `:day`
   - `step`: The count of how many units to apply for each recurrence. Defaults to `1`
 
   When the `:start` is an Elixir `DateTime` struct with a timezone other than "Etc/UTC" the recurrence will be calculated in that timezone,
