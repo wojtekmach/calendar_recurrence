@@ -161,7 +161,7 @@ defmodule CalendarRecurrenceTest do
     as an explicit DATE-TIME value describing that date and time, as
     specified in Section 3.3.5.
 
-    ###3.3.5
+    ### 3.3.5
 
     If, based on the definition of the referenced time zone, the local
     time described occurs more than once (when changing from daylight
