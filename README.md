@@ -1,6 +1,6 @@
 # CalendarRecurrence
 
-![Build Status](https://github.com/wojtekmach/calendar_recurrence/actions/workflows/ci/badge.svg)
+![Build Status](https://github.com/wojtekmach/calendar_recurrence/actions/workflows/ci.yml/badge.svg)
 
 CalendarRecurrence is an Elixir library for working with recurring dates.
 
