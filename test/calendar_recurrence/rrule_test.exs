@@ -9,6 +9,9 @@ defmodule CalendarRecurrence.RRULETest do
     {:ok, %RRULE{freq: :daily, until: ~U[2018-01-02 10:20:30Z]}} =
       RRULE.parse("FREQ=DAILY;UNTIL=20180102T102030")
 
+    {:ok, %RRULE{freq: :daily, until: ~U[2018-01-02 10:20:30Z]}} =
+      RRULE.parse("FREQ=DAILY;UNTIL=20180102T102030Z")
+
     {:ok, %RRULE{freq: :daily, until: ~D[2018-01-02]}} = RRULE.parse("FREQ=DAILY;UNTIL=20180102")
 
     {:ok, %RRULE{freq: :daily, count: 10}} = RRULE.parse("FREQ=DAILY;COUNT=10")
