@@ -22,7 +22,7 @@ defmodule CalendarRecurrence.RRULE do
   # wkst: nil
 
   @type t() :: %__MODULE__{
-          freq: :daily,
+          freq: :weekly | :daily | :hourly | :minutely | :secondly | nil,
           interval: pos_integer(),
           until: CalendarRecurrence.date() | nil,
           count: non_neg_integer() | nil
