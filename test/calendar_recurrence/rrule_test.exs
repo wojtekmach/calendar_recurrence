@@ -224,5 +224,66 @@ defmodule CalendarRecurrence.RRULETest do
              ~U"2018-01-01 10:00:01Z",
              ~U"2018-01-01 10:00:02Z"
            ]
+
+    assert Enum.take(RRULE.to_recurrence("FREQ=MONTHLY", ~D[2018-01-15]), 3) == [
+             ~D[2018-01-15],
+             ~D[2018-02-15],
+             ~D[2018-03-15]
+           ]
+
+    # with interval
+    assert Enum.take(RRULE.to_recurrence(%RRULE{freq: :monthly, interval: 2}, ~D[2018-01-15]), 3) ==
+             [
+               ~D[2018-01-15],
+               ~D[2018-03-15],
+               ~D[2018-05-15]
+             ]
+
+    # with DateTime
+    assert Enum.take(RRULE.to_recurrence(%RRULE{freq: :monthly}, ~U[2018-01-31 10:00:00Z]), 3) ==
+             [
+               ~U[2018-01-31 10:00:00Z],
+               ~U[2018-02-28 10:00:00Z],
+               ~U[2018-03-31 10:00:00Z]
+             ]
+
+    # with NaiveDateTime
+    assert Enum.take(RRULE.to_recurrence(%RRULE{freq: :monthly}, ~N[2018-01-31 10:00:00]), 3) == [
+             ~N[2018-01-31 10:00:00],
+             ~N[2018-02-28 10:00:00],
+             ~N[2018-03-31 10:00:00]
+           ]
+
+    # with count
+    assert Enum.to_list(RRULE.to_recurrence(%RRULE{freq: :monthly, count: 3}, ~D[2018-12-31])) ==
+             [
+               ~D[2018-12-31],
+               ~D[2019-01-31],
+               ~D[2019-02-28]
+             ]
+
+    # with until date
+    assert Enum.to_list(
+             RRULE.to_recurrence(%RRULE{freq: :monthly, until: ~D[2019-02-28]}, ~D[2018-12-31])
+           ) == [
+             ~D[2018-12-31],
+             ~D[2019-01-31],
+             ~D[2019-02-28]
+           ]
+
+    # with leap year
+    assert Enum.take(RRULE.to_recurrence("FREQ=MONTHLY", ~D[2020-01-31]), 3) == [
+             ~D[2020-01-31],
+             ~D[2020-02-29],
+             ~D[2020-03-31]
+           ]
+
+    # crossing year boundary
+    assert Enum.take(RRULE.to_recurrence(%RRULE{freq: :monthly, interval: 3}, ~D[2018-11-30]), 3) ==
+             [
+               ~D[2018-11-30],
+               ~D[2019-02-28],
+               ~D[2019-05-31]
+             ]
   end
 end

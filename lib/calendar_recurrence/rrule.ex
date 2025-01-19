@@ -135,6 +135,33 @@ defmodule CalendarRecurrence.RRULE do
 
   defp convert_date_type(%RRULE{until: until}, _), do: until
 
+  defp step(%RRULE{freq: :monthly, interval: interval, bymonthday: []}) do
+    fn
+      %DateTime{} = current ->
+        next = add_months(current, interval)
+        DateTime.diff(next, current, :second)
+
+      current ->
+        # if Date or NaiveDateTime, return days until next occurrence
+        next = add_months(current, interval)
+        Date.diff(next, current)
+    end
+  end
+
+  defp step(%RRULE{freq: :monthly, interval: interval, bymonthday: days}) when is_list(days) do
+    days = Enum.sort(days)
+
+    fn
+      %DateTime{} = current ->
+        next = next_monthday(current, days, interval)
+        DateTime.diff(next, current, :second)
+
+      current ->
+        next = next_monthday(current, days, interval)
+        Date.diff(next, current)
+    end
+  end
+
   defp step(%RRULE{freq: :weekly, byday: [], interval: interval}),
     do: fn
       %DateTime{} = date ->
@@ -193,4 +220,50 @@ defmodule CalendarRecurrence.RRULE do
     do: fn date ->
       DateTime.add(date, interval, :second) |> DateTime.diff(date, :second)
     end
+
+  defp add_months(%DateTime{} = date, interval) do
+    adjust_months(date, interval)
+  end
+
+  defp add_months(%Date{} = date, interval) do
+    adjust_months(date, interval)
+  end
+
+  defp add_months(%NaiveDateTime{} = date, interval) do
+    adjust_months(date, interval)
+  end
+
+  defp adjust_months(date, interval) do
+    original_day = date.day
+    new_month = date.month + interval
+    years_to_add = div(new_month - 1, 12)
+    final_month = rem(new_month - 1, 12) + 1
+
+    days_in_month = :calendar.last_day_of_the_month(date.year + years_to_add, final_month)
+    was_month_end = original_day == :calendar.last_day_of_the_month(date.year, date.month)
+
+    new_day =
+      if was_month_end do
+        days_in_month
+      else
+        min(original_day, days_in_month)
+      end
+
+    %{date | year: date.year + years_to_add, month: final_month, day: new_day}
+  end
+
+  defp next_monthday(current, days, interval) do
+    current_day = current.day
+    next_day = Enum.find(days, &(&1 > current_day))
+
+    if next_day do
+      %{current | day: next_day}
+    else
+      # next valid month and use the first available day
+      next_month = add_months(current, interval)
+      days_in_month = :calendar.last_day_of_the_month(next_month.year, next_month.month)
+      valid_day = Enum.find(days, &(&1 <= days_in_month)) || 1
+      %{next_month | day: valid_day}
+    end
+  end
 end
