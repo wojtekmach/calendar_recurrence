@@ -22,7 +22,7 @@ defmodule CalendarRecurrence.RRULE do
   # wkst: nil
 
   @type t() :: %__MODULE__{
-          freq: :weekly | :daily | :hourly | :minutely | :secondly | nil,
+          freq: :monthly | :weekly | :daily | :hourly | :minutely | :secondly | nil,
           interval: pos_integer(),
           until: CalendarRecurrence.date() | nil,
           count: non_neg_integer() | nil
@@ -239,31 +239,76 @@ defmodule CalendarRecurrence.RRULE do
     years_to_add = div(new_month - 1, 12)
     final_month = rem(new_month - 1, 12) + 1
 
-    days_in_month = :calendar.last_day_of_the_month(date.year + years_to_add, final_month)
-    was_month_end = original_day == :calendar.last_day_of_the_month(date.year, date.month)
+    days_in_new_month = :calendar.last_day_of_the_month(date.year + years_to_add, final_month)
 
-    new_day =
-      if was_month_end do
-        days_in_month
-      else
-        min(original_day, days_in_month)
-      end
+    if original_day > days_in_new_month do
+      # Skip to next month if this would create an invalid date
+      adjust_months(date, interval + 1)
+    else
+      new_day =
+        cond do
+          # Handle explicit -1 in bymonthday
+          original_day < 0 -> days_in_new_month
+          # For all other cases, use original day since we know it's valid
+          true -> original_day
+        end
 
-    %{date | year: date.year + years_to_add, month: final_month, day: new_day}
+      %{date | year: date.year + years_to_add, month: final_month, day: new_day}
+    end
   end
 
   defp next_monthday(current, days, interval) do
-    current_day = current.day
-    next_day = Enum.find(days, &(&1 > current_day))
+    current_month_days =
+      days
+      |> Enum.map(fn day ->
+        # -1, -2 etc
+        if day < 0 do
+          :calendar.last_day_of_the_month(current.year, current.month) + day + 1 # get next occurrence
+        else
+          day
+        end
+      end)
+      |> Enum.filter(fn day ->
+        day <= :calendar.last_day_of_the_month(current.year, current.month) &&
+          %{current | day: day} |> Date.compare(current) == :gt
+      end)
 
-    if next_day do
-      %{current | day: next_day}
-    else
-      # next valid month and use the first available day
-      next_month = add_months(current, interval)
-      days_in_month = :calendar.last_day_of_the_month(next_month.year, next_month.month)
-      valid_day = Enum.find(days, &(&1 <= days_in_month)) || 1
-      %{next_month | day: valid_day}
+    case current_month_days do
+      [] ->
+        # no valid days in current month, move to next month
+        new_month = current.month + interval
+
+        next_month =
+          cond do
+            new_month > 12 ->
+              years_to_add = div(new_month - 1, 12)
+              remaining_month = rem(new_month - 1, 12) + 1
+              %{current | year: current.year + years_to_add, month: remaining_month}
+
+            true ->
+              %{current | month: new_month}
+          end
+
+        # now take the bymonthday days from the next month
+        next_day =
+          days
+          |> Enum.map(fn day ->
+            if day < 0 do
+              :calendar.last_day_of_the_month(next_month.year, next_month.month) + day + 1
+            else
+              day
+            end
+          end)
+          |> Enum.filter(fn day ->
+            day <= :calendar.last_day_of_the_month(next_month.year, next_month.month)
+          end)
+          |> Enum.sort()
+          |> List.first()
+
+        %{next_month | day: next_day}
+
+      [next_day | _] ->
+        %{current | day: next_day}
     end
   end
 end

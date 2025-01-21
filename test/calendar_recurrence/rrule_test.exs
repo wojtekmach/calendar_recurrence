@@ -26,6 +26,8 @@ defmodule CalendarRecurrence.RRULETest do
 
     {:ok, %RRULE{freq: :weekly, byday: [1, 2]}} = RRULE.parse("FREQ=WEEKLY;BYDAY=MO,TU")
 
+    {:ok, %RRULE{freq: :monthly}} = RRULE.parse("FREQ=MONTHLY")
+
     {:error, :missing_freq} = RRULE.parse("COUNT=10")
 
     {:error, :until_or_count} = RRULE.parse("FREQ=DAILY;UNTIL=20180101;COUNT=10")
@@ -231,6 +233,12 @@ defmodule CalendarRecurrence.RRULETest do
              ~D[2018-03-15]
            ]
 
+    assert Enum.take(RRULE.to_recurrence("FREQ=MONTHLY", ~D[2018-01-31]), 3) == [
+             ~D[2018-01-31],
+             ~D[2018-03-31],
+             ~D[2018-05-31]
+           ]
+
     # with interval
     assert Enum.take(RRULE.to_recurrence(%RRULE{freq: :monthly, interval: 2}, ~D[2018-01-15]), 3) ==
              [
@@ -243,23 +251,80 @@ defmodule CalendarRecurrence.RRULETest do
     assert Enum.take(RRULE.to_recurrence(%RRULE{freq: :monthly}, ~U[2018-01-31 10:00:00Z]), 3) ==
              [
                ~U[2018-01-31 10:00:00Z],
-               ~U[2018-02-28 10:00:00Z],
-               ~U[2018-03-31 10:00:00Z]
+               ~U[2018-03-31 10:00:00Z],
+               ~U[2018-05-31 10:00:00Z]
              ]
 
     # with NaiveDateTime
     assert Enum.take(RRULE.to_recurrence(%RRULE{freq: :monthly}, ~N[2018-01-31 10:00:00]), 3) == [
              ~N[2018-01-31 10:00:00],
-             ~N[2018-02-28 10:00:00],
-             ~N[2018-03-31 10:00:00]
+             ~N[2018-03-31 10:00:00],
+             ~N[2018-05-31 10:00:00]
            ]
+
+    # bymonthday
+    assert Enum.to_list(
+             RRULE.to_recurrence(
+               %RRULE{freq: :monthly, bymonthday: [-2], count: 4},
+               ~D[2024-12-31]
+             )
+           ) ==
+             [
+               ~D[2024-12-31],
+               ~D[2025-01-30],
+               ~D[2025-02-27],
+               ~D[2025-03-30]
+             ]
+
+    # bymonthday
+    assert Enum.to_list(
+             RRULE.to_recurrence(
+               %RRULE{freq: :monthly, bymonthday: [-1], count: 4},
+               ~D[2024-12-31]
+             )
+           ) ==
+             [
+               ~D[2024-12-31],
+               ~D[2025-01-31],
+               ~D[2025-02-28],
+               ~D[2025-03-31]
+             ]
+
+    # bymonthday
+    assert Enum.to_list(
+             RRULE.to_recurrence(
+               %RRULE{freq: :monthly, bymonthday: [15], count: 5},
+               ~D[2024-12-31]
+             )
+           ) ==
+             [
+               ~D[2024-12-31],
+               ~D[2025-01-15],
+               ~D[2025-02-15],
+               ~D[2025-03-15],
+               ~D[2025-04-15]
+             ]
+
+    # # bymonthday and bymonth
+    # assert Enum.to_list(
+    #          RRULE.to_recurrence(
+    #            %RRULE{freq: :monthly, bymonthday: [15], bymonth: [1,3,4], count: 4},
+    #            ~D[2024-12-31]
+    #          )
+    #        ) ==
+    #          [
+    #            ~D[2024-12-31],
+    #            ~D[2025-01-15],
+    #            ~D[2025-02-15],
+    #            ~D[2025-03-15],
+    #          ]
 
     # with count
     assert Enum.to_list(RRULE.to_recurrence(%RRULE{freq: :monthly, count: 3}, ~D[2018-12-31])) ==
              [
                ~D[2018-12-31],
                ~D[2019-01-31],
-               ~D[2019-02-28]
+               ~D[2019-03-31]
              ]
 
     # with until date
@@ -267,23 +332,22 @@ defmodule CalendarRecurrence.RRULETest do
              RRULE.to_recurrence(%RRULE{freq: :monthly, until: ~D[2019-02-28]}, ~D[2018-12-31])
            ) == [
              ~D[2018-12-31],
-             ~D[2019-01-31],
-             ~D[2019-02-28]
+             ~D[2019-01-31]
            ]
 
     # with leap year
-    assert Enum.take(RRULE.to_recurrence("FREQ=MONTHLY", ~D[2020-01-31]), 3) == [
-             ~D[2020-01-31],
-             ~D[2020-02-29],
-             ~D[2020-03-31]
+    assert Enum.take(RRULE.to_recurrence("FREQ=MONTHLY", ~D[2024-01-29]), 3) == [
+             ~D[2024-01-29],
+             ~D[2024-02-29],
+             ~D[2024-03-29]
            ]
 
     # crossing year boundary
     assert Enum.take(RRULE.to_recurrence(%RRULE{freq: :monthly, interval: 3}, ~D[2018-11-30]), 3) ==
              [
                ~D[2018-11-30],
-               ~D[2019-02-28],
-               ~D[2019-05-31]
+               ~D[2019-03-30],
+               ~D[2019-06-30]
              ]
   end
 end
