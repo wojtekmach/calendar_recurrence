@@ -28,6 +28,34 @@ defmodule CalendarRecurrence.RRULETest do
 
     {:ok, %RRULE{freq: :monthly}} = RRULE.parse("FREQ=MONTHLY")
 
+    {:ok, %RRULE{freq: :monthly, bymonthday: [-1]}} = RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=-1")
+
+    # {:ok, %RRULE{freq: :monthly, bymonthday: [15]}} = RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15")
+
+    # {:ok, %RRULE{freq: :monthly, bymonthday: [15], bymonth: [1, 3, 4]}} =
+    #   RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15;BYMONTH=1,3,4")
+
+    # {:ok, %RRULE{freq: :monthly, bymonthday: [15], bymonth: [1, 3, 4]}} =
+    #   RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15;BYMONTH=1,3,4")
+
+    # {:ok, %RRULE{freq: :monthly, bymonthday: [15], bymonth: [1, 3, 4]}} =
+    #   RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15;BYMONTH=1,3,4")
+
+    # {:ok, %RRULE{freq: :monthly, bymonthday: [15], bymonth: [1, 3, 4]}} =
+    #   RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15;BYMONTH=1,3,4")
+
+    # {:ok, %RRULE{freq: :monthly, bymonthday: [15], bymonth: [1, 3, 4]}} =
+    #   RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15;BYMONTH=1,3,4")
+
+    # {:ok, %RRULE{freq: :monthly, bymonthday: [15], bymonth: [1, 3, 4]}} =
+    #   RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15;BYMONTH=1,3,4")
+
+    # {:ok, %RRULE{freq: :monthly, bymonthday: [15], bymonth: [1, 3, 4]}} =
+    #   RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15;BYMONTH=1,3,4")
+
+    # {:ok, %RRULE{freq: :monthly, bymonthday: [15], bymonth: [1, 3, 4]}} =
+    #   RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15;BYMONTH=1,3,4")
+
     {:error, :missing_freq} = RRULE.parse("COUNT=10")
 
     {:error, :until_or_count} = RRULE.parse("FREQ=DAILY;UNTIL=20180101;COUNT=10")

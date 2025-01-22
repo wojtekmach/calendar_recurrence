@@ -247,9 +247,8 @@ defmodule CalendarRecurrence.RRULE do
     else
       new_day =
         cond do
-          # Handle explicit -1 in bymonthday
+          # -1 in bymonthday
           original_day < 0 -> days_in_new_month
-          # For all other cases, use original day since we know it's valid
           true -> original_day
         end
 
@@ -263,7 +262,8 @@ defmodule CalendarRecurrence.RRULE do
       |> Enum.map(fn day ->
         # -1, -2 etc
         if day < 0 do
-          :calendar.last_day_of_the_month(current.year, current.month) + day + 1 # get next occurrence
+          # get next occurrence
+          :calendar.last_day_of_the_month(current.year, current.month) + day + 1
         else
           day
         end
