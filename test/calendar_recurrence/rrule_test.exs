@@ -30,31 +30,18 @@ defmodule CalendarRecurrence.RRULETest do
 
     {:ok, %RRULE{freq: :monthly, bymonthday: [-1]}} = RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=-1")
 
-    # {:ok, %RRULE{freq: :monthly, bymonthday: [15]}} = RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15")
+    {:ok, %RRULE{freq: :monthly, bymonthday: [5]}} = RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=5")
 
-    # {:ok, %RRULE{freq: :monthly, bymonthday: [15], bymonth: [1, 3, 4]}} =
-    #   RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15;BYMONTH=1,3,4")
+    {:ok, %RRULE{freq: :monthly, bymonthday: [-15]}} = RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=-15")
 
-    # {:ok, %RRULE{freq: :monthly, bymonthday: [15], bymonth: [1, 3, 4]}} =
-    #   RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15;BYMONTH=1,3,4")
+    # test 15 evaluated before 1
+    {:ok, %RRULE{freq: :monthly, bymonthday: [15]}} = RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15")
 
-    # {:ok, %RRULE{freq: :monthly, bymonthday: [15], bymonth: [1, 3, 4]}} =
-    #   RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15;BYMONTH=1,3,4")
+    {:ok, %RRULE{freq: :monthly, bymonthday: [5], bymonth: [1, 3, 4]}} =
+      RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=5;BYMONTH=1,3,4")
 
-    # {:ok, %RRULE{freq: :monthly, bymonthday: [15], bymonth: [1, 3, 4]}} =
-    #   RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15;BYMONTH=1,3,4")
-
-    # {:ok, %RRULE{freq: :monthly, bymonthday: [15], bymonth: [1, 3, 4]}} =
-    #   RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15;BYMONTH=1,3,4")
-
-    # {:ok, %RRULE{freq: :monthly, bymonthday: [15], bymonth: [1, 3, 4]}} =
-    #   RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15;BYMONTH=1,3,4")
-
-    # {:ok, %RRULE{freq: :monthly, bymonthday: [15], bymonth: [1, 3, 4]}} =
-    #   RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15;BYMONTH=1,3,4")
-
-    # {:ok, %RRULE{freq: :monthly, bymonthday: [15], bymonth: [1, 3, 4]}} =
-    #   RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15;BYMONTH=1,3,4")
+    {:ok, %RRULE{freq: :monthly, bymonthday: [15], bymonth: [1, 3, 4]}} =
+      RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15;BYMONTH=1,3,4")
 
     {:error, :missing_freq} = RRULE.parse("COUNT=10")
 
