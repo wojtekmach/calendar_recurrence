@@ -135,6 +135,36 @@ defmodule CalendarRecurrence.RRULE do
 
   defp convert_date_type(%RRULE{until: until}, _), do: until
 
+  defp step(%RRULE{freq: :monthly, bymonthday: [], bymonth: months})
+       when is_list(months) and length(months) > 0 do
+    months = Enum.sort(months)
+
+    fn
+      %DateTime{} = current ->
+        next_month = Enum.find(months, &(&1 > current.month))
+
+        next =
+          if next_month do
+            %{current | month: next_month, day: 1}
+          else
+            next_month = List.first(months)
+            %{current | year: current.year + 1, month: next_month, day: 1}
+          end
+
+        DateTime.diff(next, current, :second)
+
+      current ->
+        next_month = Enum.find(months, &(&1 > current.month))
+
+        if next_month do
+          Date.diff(%{current | month: next_month, day: 1}, current)
+        else
+          next_month = List.first(months)
+          Date.diff(%{current | year: current.year + 1, month: next_month, day: 1}, current)
+        end
+    end
+  end
+
   defp step(%RRULE{freq: :monthly, bymonthday: days, bymonth: months})
        when is_list(days) and is_list(months) and length(months) > 0 do
     months = Enum.sort(months)
