@@ -248,6 +248,7 @@ defmodule CalendarRecurrence.RRULETest do
              ~D[2018-03-15]
            ]
 
+    # Per https://datatracker.ietf.org/doc/html/rfc5545#page-132, invalid dates like Feb 31 are ignored.
     assert Enum.take(RRULE.to_recurrence("FREQ=MONTHLY", ~D[2018-01-31]), 3) == [
              ~D[2018-01-31],
              ~D[2018-03-31],
