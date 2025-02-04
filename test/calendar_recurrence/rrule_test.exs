@@ -320,6 +320,7 @@ defmodule CalendarRecurrence.RRULETest do
                ~D[2025-03-15],
                ~D[2025-04-15]
              ]
+
     # multiple bymonthday
     assert Enum.to_list(
              RRULE.to_recurrence(
