@@ -320,6 +320,20 @@ defmodule CalendarRecurrence.RRULETest do
                ~D[2025-03-15],
                ~D[2025-04-15]
              ]
+    # multiple bymonthday
+    assert Enum.to_list(
+             RRULE.to_recurrence(
+               %RRULE{freq: :monthly, bymonthday: [15, 20], count: 5},
+               ~D[2024-12-31]
+             )
+           ) ==
+             [
+               ~D[2024-12-31],
+               ~D[2025-01-15],
+               ~D[2025-01-20],
+               ~D[2025-02-15],
+               ~D[2025-02-20]
+             ]
 
     # bymonthday and bymonth
     assert Enum.to_list(
