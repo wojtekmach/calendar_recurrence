@@ -22,7 +22,7 @@ defmodule CalendarRecurrence.MixProject do
       ],
       docs: [
         source_url: @source_url,
-        source_ref: @version
+        source_ref: "v#{@version}"
       ]
     ]
   end
