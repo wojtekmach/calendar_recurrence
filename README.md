@@ -33,9 +33,9 @@ Currently a small subset of RRULE grammar is implemented, more support coming so
 Add to `mix.exs`:
 
 ```elixir
-defp deps() do
+defp deps do
   [
-    {:calendar_recurrence, github: "wojtekmach/calendar_recurrence"}
+    {:calendar_recurrence, "~> 0.1.0"}
   ]
 end
 ```
