@@ -372,4 +372,79 @@ defmodule CalendarRecurrence.RRULE do
         %{current | day: next_day}
     end
   end
+
+  defimpl String.Chars do
+    @doc """
+    Converts `%RRULE{}` into a rrule string.
+
+    ## Examples
+
+        iex> to_string(%RRULE{freq: :daily, count: 2})
+        "FREQ=DAILY;COUNT=2"
+
+    """
+    @spec to_string(CalendarRecurrence.RRULE.t()) :: binary()
+    def to_string(rrule) do
+      rrule = Map.from_struct(rrule)
+
+      [
+        :freq,
+        :interval,
+        :until,
+        :count,
+        :bysecond,
+        :byminute,
+        :byhour,
+        :byday,
+        :bymonthday,
+        :byyearday,
+        :bymonth
+      ]
+      |> Enum.reduce([], fn key, acc -> [add_part(key, rrule[key]) | acc] end)
+      |> Enum.reverse()
+      |> Enum.reject(&(&1 == []))
+      |> Enum.intersperse(";")
+      |> IO.iodata_to_binary()
+    end
+
+    @weekdays %{
+      1 => "MO",
+      2 => "TU",
+      3 => "WE",
+      4 => "TH",
+      5 => "FR",
+      6 => "SA",
+      7 => "SU"
+    }
+
+    defp add_part(_key, nil), do: []
+    defp add_part(_key, []), do: []
+    defp add_part(:interval, 1), do: []
+
+    defp add_part(:until = key, value) do
+      key_value(key, DateTime.to_naive(value) |> NaiveDateTime.to_iso8601(:basic))
+    end
+
+    defp add_part(:byday = key, value) do
+      days = Enum.map(value, fn day -> @weekdays[day] end) |> Enum.intersperse(",")
+      key_value(key, days)
+    end
+
+    defp add_part(key, value) when is_list(value) do
+      values = value |> Enum.map(&Kernel.to_string/1) |> Enum.intersperse(",")
+      key_value(key, values)
+    end
+
+    defp add_part(key, value) when is_integer(value) or is_atom(value) do
+      key_value(key, upcase(value))
+    end
+
+    defp key_value(key, value) do
+      [upcase(key), "=", value]
+    end
+
+    defp upcase(value) do
+      String.Chars.to_string(value) |> String.upcase()
+    end
+  end
 end

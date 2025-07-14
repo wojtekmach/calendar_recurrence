@@ -20,18 +20,17 @@ iex> alias CalendarRecurrence.RRULE
 iex> RRULE.parse("FREQ=DAILY;COUNT=10")
 iex> {:ok, %RRULE{freq: :daily, count: 10}}
 ```
+
 ```elixir
 iex> RRULE.to_recurrence("FREQ=WEEKLY;COUNT=4;BYDAY=MO,WE", ~D[2018-01-01]) |> Enum.to_list()
 [~D[2018-01-01], ~D[2018-01-03], ~D[2018-01-08], ~D[2018-01-10]]
 ```
 
-It also implements a conversion via the String.Chars protocol:
+It also implements a string conversion using the `String.Chars` protocol:
 ```elixir
-iex> %RRULE{freq: :daily, count: 10} |> to_string()
-iex> "FREQ=DAILY;COUNT=10"
+iex> %RRULE{freq: :daily, bysecond: [5, 10]} |> to_string()
+iex> "FREQ=DAILY;BYSECOND=5,10"
 ```
-
-
 
 Currently a small subset of RRULE grammar is implemented, more support coming soon.
 
