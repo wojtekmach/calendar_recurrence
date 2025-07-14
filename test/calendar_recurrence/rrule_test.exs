@@ -52,6 +52,25 @@ defmodule CalendarRecurrence.RRULETest do
     {:error, {:leftover, "foobar"}} = RRULE.parse("FREQ=DAILYfoobar")
   end
 
+  test "to_string/1" do
+    assert "FREQ=DAILY" = to_string(%RRULE{freq: :daily})
+
+    assert "FREQ=DAILY;INTERVAL=2;COUNT=10" =
+             to_string(%RRULE{freq: :daily, count: 10, interval: 2})
+
+    assert "FREQ=DAILY;UNTIL=20180102T102030" =
+             to_string(%RRULE{freq: :daily, until: ~U[2018-01-02 10:20:30Z]})
+
+    assert "FREQ=DAILY;BYSECOND=5,10" = to_string(%RRULE{freq: :daily, bysecond: [5, 10]})
+    assert "FREQ=DAILY;BYMINUTE=5,10" = to_string(%RRULE{freq: :daily, byminute: [5, 10]})
+    assert "FREQ=WEEKLY;BYDAY=MO,TU" = to_string(%RRULE{freq: :weekly, byday: [1, 2]})
+
+    assert "FREQ=MONTHLY" = to_string(%RRULE{freq: :monthly})
+
+    assert "FREQ=MONTHLY;BYMONTHDAY=5;BYMONTH=1,3,4" =
+             to_string(%RRULE{freq: :monthly, bymonthday: [5], bymonth: [1, 3, 4]})
+  end
+
   test "to_recurrence/1" do
     assert Enum.take(RRULE.to_recurrence("FREQ=DAILY", ~D[2018-01-01]), 3) == [
              ~D[2018-01-01],
