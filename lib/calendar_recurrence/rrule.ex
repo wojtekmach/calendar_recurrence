@@ -402,7 +402,7 @@ defmodule CalendarRecurrence.RRULE do
       ]
       |> Enum.reduce([], fn key, acc -> [add_part(key, rrule[key]) | acc] end)
       |> Enum.reverse()
-      |> Enum.reject(&(&1 == []))
+      |> Enum.reject(&is_nil/1)
       |> Enum.intersperse(";")
       |> IO.iodata_to_binary()
     end
@@ -417,21 +417,21 @@ defmodule CalendarRecurrence.RRULE do
       7 => "SU"
     }
 
-    defp add_part(_key, nil), do: []
-    defp add_part(_key, []), do: []
-    defp add_part(:interval, 1), do: []
+    defp add_part(_key, nil), do: nil
+    defp add_part(_key, []), do: nil
+    defp add_part(:interval, 1), do: nil
 
-    defp add_part(:until = key, value) do
+    defp add_part(:until = key, %DateTime{} = value) do
       key_value(key, DateTime.to_naive(value) |> NaiveDateTime.to_iso8601(:basic))
     end
 
     defp add_part(:byday = key, value) do
-      days = Enum.map(value, fn day -> @weekdays[day] end) |> Enum.intersperse(",")
+      days = Enum.map_join(value, ",", fn day -> @weekdays[day] end)
       key_value(key, days)
     end
 
     defp add_part(key, value) when is_list(value) do
-      values = value |> Enum.map(&Kernel.to_string/1) |> Enum.intersperse(",")
+      values = value |> Enum.join(",")
       key_value(key, values)
     end
 
