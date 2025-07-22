@@ -58,6 +58,12 @@ defmodule CalendarRecurrence.RRULETest do
     assert "FREQ=DAILY;INTERVAL=2;COUNT=10" =
              to_string(%RRULE{freq: :daily, count: 10, interval: 2})
 
+    assert "FREQ=DAILY;UNTIL=20180102" =
+             to_string(%RRULE{freq: :daily, until: ~D[2018-01-02]})
+
+    assert "FREQ=DAILY;UNTIL=20180102T102030" =
+             to_string(%RRULE{freq: :daily, until: ~N[2018-01-02 10:20:30Z]})
+
     assert "FREQ=DAILY;UNTIL=20180102T102030" =
              to_string(%RRULE{freq: :daily, until: ~U[2018-01-02 10:20:30Z]})
 

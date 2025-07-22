@@ -425,6 +425,14 @@ defmodule CalendarRecurrence.RRULE do
       key_value(key, DateTime.to_naive(value) |> NaiveDateTime.to_iso8601(:basic))
     end
 
+    defp add_part(:until = key, %NaiveDateTime{} = value) do
+      key_value(key, NaiveDateTime.to_iso8601(value, :basic))
+    end
+
+    defp add_part(:until = key, %Date{} = value) do
+      key_value(key, Date.to_iso8601(value, :basic))
+    end
+
     defp add_part(:byday = key, value) do
       days = Enum.map_join(value, ",", fn day -> @weekdays[day] end)
       key_value(key, days)
