@@ -106,7 +106,7 @@ defmodule CalendarRecurrenceTest do
 
   describe "timezones" do
     setup do
-      Calendar.put_time_zone_database(Tzdata.TimeZoneDatabase)
+      Calendar.put_time_zone_database(Zoneinfo.TimeZoneDatabase)
     end
 
     test "wall clock time stays the same while switching to DST" do

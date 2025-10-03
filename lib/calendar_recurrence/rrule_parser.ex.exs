@@ -93,6 +93,19 @@ defmodule CalendarRecurrence.RRULE.Parser do
   days = any_of(~w(SU MO TU WE TH FR SA), &string(to_string(&1)))
   byday = part("BYDAY", non_empty_list(days))
 
+  months = any_of(1..12, &string(to_string(&1)))
+  bymonth = part("BYMONTH", non_empty_list(months))
+
+  monthdays =
+    choice(
+      Enum.map(
+        Enum.concat(-31..-1, 31..1),
+        &string(to_string(&1))
+      )
+    )
+
+  bymonthday = part("BYMONTHDAY", non_empty_list(monthdays))
+
   part =
     choice([
       freq,
@@ -102,7 +115,10 @@ defmodule CalendarRecurrence.RRULE.Parser do
       bysecond,
       byminute,
       byhour,
-      byday
+      byday,
+      byday,
+      bymonth,
+      bymonthday
     ])
 
   defparsec(
@@ -139,6 +155,11 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp cast_value("BYDAY", days), do: Enum.map(days, &cast_byday/1)
+  defp cast_value("BYMONTHDAY", days) when is_list(days), do: Enum.map(days, &String.to_integer/1)
+  defp cast_value("BYMONTHDAY", day), do: [String.to_integer(day)]
+
+  defp cast_value("BYMONTH", months) when is_list(months), do: months
+  defp cast_value("BYMONTH", month), do: [month]
 
   defp cast_value(_, value), do: value
 
