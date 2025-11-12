@@ -70,6 +70,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
     date
     |> ignore(string("T"))
     |> concat(time)
+    |> optional(string("Z"))
     |> label("datetime")
 
   freq = part("FREQ", any_of(freqs, &string/1))
@@ -146,11 +147,17 @@ defmodule CalendarRecurrence.RRULE.Parser do
     date
   end
 
-  defp cast_value("UNTIL", [year, month, day, hour, minute, second]) do
+  defp cast_value("UNTIL", [year, month, day, hour, minute, second | utc_suffix]) do
     {:ok, naive_datetime} = NaiveDateTime.new(year, month, day, hour, minute, second)
-    {:ok, datetime} = DateTime.from_naive(naive_datetime, "Etc/UTC")
 
-    datetime
+    case utc_suffix do
+      ["Z"] ->
+        {:ok, datetime} = DateTime.from_naive(naive_datetime, "Etc/UTC")
+        datetime
+
+      _ ->
+        naive_datetime
+    end
   end
 
   defp cast_value("BYDAY", days), do: Enum.map(days, &cast_byday/1)
