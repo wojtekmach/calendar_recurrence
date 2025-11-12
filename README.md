@@ -42,7 +42,7 @@ Add to `mix.exs`:
 ```elixir
 defp deps do
   [
-    {:calendar_recurrence, "~> 0.1.0"}
+    {:calendar_recurrence, "~> 0.2.0"}
   ]
 end
 ```
