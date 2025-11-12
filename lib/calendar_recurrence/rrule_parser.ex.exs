@@ -81,13 +81,13 @@ defmodule CalendarRecurrence.RRULE.Parser do
 
   interval = part("INTERVAL", integer(min: 1))
 
-  seconds = any_of(59..0, &string(to_string(&1)))
+  seconds = any_of(59..0//-1, &string(to_string(&1)))
   bysecond = part("BYSECOND", non_empty_list(seconds))
 
-  minutes = any_of(59..0, &string(to_string(&1)))
+  minutes = any_of(59..0//-1, &string(to_string(&1)))
   byminute = part("BYMINUTE", non_empty_list(minutes))
 
-  hours = any_of(23..0, &string(to_string(&1)))
+  hours = any_of(23..0//-1, &string(to_string(&1)))
   byhour = part("BYHOUR", non_empty_list(hours))
 
   days = any_of(~w(SU MO TU WE TH FR SA), &string(to_string(&1)))
@@ -99,7 +99,7 @@ defmodule CalendarRecurrence.RRULE.Parser do
   monthdays =
     choice(
       Enum.map(
-        Enum.concat(-31..-1, 31..1),
+        Enum.concat(-31..-1, 31..1//-1),
         &string(to_string(&1))
       )
     )
