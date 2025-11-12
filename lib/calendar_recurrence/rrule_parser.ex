@@ -1,5 +1,5 @@
 # Generated from lib/calendar_recurrence/rrule_parser.ex.exs, do not edit.
-# Generated at 2025-11-05 07:51:01Z.
+# Generated at 2025-11-12 12:50:26Z.
 
 if Code.ensure_loaded?(NimbleParsec) do
   defmodule CalendarRecurrence.RRULE.ParserHelpers do
@@ -7300,17 +7300,13 @@ defmodule CalendarRecurrence.RRULE.Parser do
     date
   end
 
-  defp cast_value("UNTIL", [year, month, day, hour, minute, second | utc_suffix]) do
-    {:ok, naive_datetime} = NaiveDateTime.new(year, month, day, hour, minute, second)
+  defp cast_value("UNTIL", [year, month, day, hour, minute, second]) do
+    NaiveDateTime.new!(year, month, day, hour, minute, second)
+  end
 
-    case utc_suffix do
-      ["Z"] ->
-        {:ok, datetime} = DateTime.from_naive(naive_datetime, "Etc/UTC")
-        datetime
-
-      _ ->
-        naive_datetime
-    end
+  defp cast_value("UNTIL", [year, month, day, hour, minute, second, "Z"]) do
+    NaiveDateTime.new!(year, month, day, hour, minute, second)
+    |> DateTime.from_naive!("Etc/UTC")
   end
 
   defp cast_value("BYDAY", days), do: Enum.map(days, &cast_byday/1)
