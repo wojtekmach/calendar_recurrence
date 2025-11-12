@@ -26,7 +26,8 @@ iex> RRULE.to_recurrence("FREQ=WEEKLY;COUNT=4;BYDAY=MO,WE", ~D[2018-01-01]) |> E
 [~D[2018-01-01], ~D[2018-01-03], ~D[2018-01-08], ~D[2018-01-10]]
 ```
 
-It also implements a string conversion using the `String.Chars` protocol:
+It also implements the `String.Chars` protocol:
+
 ```elixir
 iex> %RRULE{freq: :daily, bysecond: [5, 10]} |> to_string()
 iex> "FREQ=DAILY;BYSECOND=5,10"
