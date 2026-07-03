@@ -26,6 +26,20 @@ iex> RRULE.to_recurrence("FREQ=WEEKLY;COUNT=4;BYDAY=MO,WE", ~D[2018-01-01]) |> E
 [~D[2018-01-01], ~D[2018-01-03], ~D[2018-01-08], ~D[2018-01-10]]
 ```
 
+Monthly BYDAY with ordinal prefixes is supported per RFC 5545. For example, "first Monday of every month":
+
+```elixir
+iex> RRULE.to_recurrence("FREQ=MONTHLY;BYDAY=1MO", ~D[2024-01-01]) |> Enum.take(4)
+[~D[2024-01-01], ~D[2024-02-05], ~D[2024-03-04], ~D[2024-04-01]]
+```
+
+Negative ordinals count from the end of the month. "Last Friday of every month":
+
+```elixir
+iex> RRULE.to_recurrence("FREQ=MONTHLY;BYDAY=-1FR", ~D[2024-01-26]) |> Enum.take(4)
+[~D[2024-01-26], ~D[2024-02-23], ~D[2024-03-29], ~D[2024-04-26]]
+```
+
 It also implements the `String.Chars` protocol:
 
 ```elixir

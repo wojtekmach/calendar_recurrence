@@ -90,8 +90,11 @@ defmodule CalendarRecurrence.RRULE.Parser do
   hours = any_of(23..0//-1, &string(to_string(&1)))
   byhour = part("BYHOUR", non_empty_list(hours))
 
-  days = any_of(~w(SU MO TU WE TH FR SA), &string(to_string(&1)))
-  byday = part("BYDAY", non_empty_list(days))
+  day_name = any_of(~w(SU MO TU WE TH FR SA), &string(to_string(&1)))
+  ordinal_sign = choice([string("-"), string("+"), empty() |> replace("+")])
+  ordinal_byday = ordinal_sign |> concat(integer(min: 1, max: 2)) |> concat(day_name) |> wrap()
+  byday_item = choice([ordinal_byday, day_name])
+  byday = part("BYDAY", non_empty_list(byday_item))
 
   months = any_of(1..12, &string(to_string(&1)))
   bymonth = part("BYMONTH", non_empty_list(months))
@@ -115,7 +118,6 @@ defmodule CalendarRecurrence.RRULE.Parser do
       bysecond,
       byminute,
       byhour,
-      byday,
       byday,
       bymonth,
       bymonthday
@@ -165,6 +167,8 @@ defmodule CalendarRecurrence.RRULE.Parser do
 
   defp cast_value(_, value), do: value
 
+  defp cast_byday(["+", n, day]), do: {n, cast_byday(day)}
+  defp cast_byday(["-", n, day]), do: {-n, cast_byday(day)}
   defp cast_byday("SU"), do: 7
   defp cast_byday("MO"), do: 1
   defp cast_byday("TU"), do: 2
