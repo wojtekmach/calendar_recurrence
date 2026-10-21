@@ -68,6 +68,13 @@ defmodule CalendarRecurrence.RRULETest do
     {:error, {:leftover, "foobar"}} = RRULE.parse("FREQ=DAILYfoobar")
   end
 
+  test "to_string/1 and parse/1 roundtrip UNTIL" do
+    for until <- [~D[2018-01-02], ~N[2018-01-02 10:20:30], ~U[2018-01-02 10:20:30Z]] do
+      rrule = %RRULE{freq: :daily, until: until}
+      assert RRULE.parse(to_string(rrule)) == {:ok, rrule}
+    end
+  end
+
   test "to_string/1" do
     assert "FREQ=DAILY" = to_string(%RRULE{freq: :daily})
 
@@ -80,8 +87,14 @@ defmodule CalendarRecurrence.RRULETest do
     assert "FREQ=DAILY;UNTIL=20180102T102030" =
              to_string(%RRULE{freq: :daily, until: ~N[2018-01-02 10:20:30Z]})
 
-    assert "FREQ=DAILY;UNTIL=20180102T102030" =
+    assert "FREQ=DAILY;UNTIL=20180102T102030Z" =
              to_string(%RRULE{freq: :daily, until: ~U[2018-01-02 10:20:30Z]})
+
+    until =
+      DateTime.new!(~D[2018-01-02], ~T[10:20:30], "Europe/Warsaw", Zoneinfo.TimeZoneDatabase)
+
+    assert "FREQ=DAILY;UNTIL=20180102T092030Z" =
+             to_string(%RRULE{freq: :daily, until: until})
 
     assert "FREQ=DAILY;BYSECOND=5,10" = to_string(%RRULE{freq: :daily, bysecond: [5, 10]})
     assert "FREQ=DAILY;BYMINUTE=5,10" = to_string(%RRULE{freq: :daily, byminute: [5, 10]})
