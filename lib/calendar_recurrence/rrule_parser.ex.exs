@@ -116,7 +116,6 @@ defmodule CalendarRecurrence.RRULE.Parser do
       byminute,
       byhour,
       byday,
-      byday,
       bymonth,
       bymonthday
     ])
