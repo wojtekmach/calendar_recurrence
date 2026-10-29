@@ -57,7 +57,7 @@ defmodule CalendarRecurrence.RRULETest do
     {:ok, %RRULE{bymonth: [3], bymonthday: [5, -5]}} =
       RRULE.parse("FREQ=YEARLY;BYMONTH=03;BYMONTHDAY=05,-05")
 
-    {:error, {:leftover, "5"}} = RRULE.parse("FREQ=DAILY;BYHOUR=005")
+    {:error, {:leftover, ";BYHOUR=005"}} = RRULE.parse("FREQ=DAILY;BYHOUR=005")
 
     {:error, :missing_freq} = RRULE.parse("COUNT=10")
 

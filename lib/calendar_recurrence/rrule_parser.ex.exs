@@ -36,6 +36,7 @@ if Code.ensure_loaded?(NimbleParsec) do
       |> Enum.sort_by(fn {string, _value} -> byte_size(string) end, :desc)
       |> Enum.map(fn {string, value} -> replace(string(string), value) end)
       |> choice()
+      |> lookahead_not(ascii_char([?0..?9]))
     end
 
     def zero_pad(val, count) when val >= 0 do
