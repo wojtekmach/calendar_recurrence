@@ -46,6 +46,19 @@ defmodule CalendarRecurrence.RRULETest do
     {:ok, %RRULE{freq: :monthly, bymonthday: [15], bymonth: [1, 3, 4]}} =
       RRULE.parse("FREQ=MONTHLY;BYMONTHDAY=15;BYMONTH=1,3,4")
 
+    # test 10, 11 and 12 evaluated before 1
+    {:ok, %RRULE{freq: :yearly, bymonth: [1, 10, 11, 12]}} =
+      RRULE.parse("FREQ=YEARLY;BYMONTH=1,10,11,12")
+
+    # RFC 5545 numeric values are 1*2DIGIT, so zero-padded values are valid
+    {:ok, %RRULE{bysecond: [0, 5], byminute: [0, 5], byhour: [0, 9]}} =
+      RRULE.parse("FREQ=DAILY;BYSECOND=00,05;BYMINUTE=00,05;BYHOUR=00,09")
+
+    {:ok, %RRULE{bymonth: [3], bymonthday: [5, -5]}} =
+      RRULE.parse("FREQ=YEARLY;BYMONTH=03;BYMONTHDAY=05,-05")
+
+    {:error, {:leftover, ";BYHOUR=005"}} = RRULE.parse("FREQ=DAILY;BYHOUR=005")
+
     {:error, :missing_freq} = RRULE.parse("COUNT=10")
 
     {:error, :until_or_count} = RRULE.parse("FREQ=DAILY;UNTIL=20180101;COUNT=10")
@@ -53,6 +66,13 @@ defmodule CalendarRecurrence.RRULETest do
     {:error, "expected string \"FREQ\", followed by" <> _} = RRULE.parse("bad")
 
     {:error, {:leftover, "foobar"}} = RRULE.parse("FREQ=DAILYfoobar")
+  end
+
+  test "to_string/1 and parse/1 roundtrip UNTIL" do
+    for until <- [~D[2018-01-02], ~N[2018-01-02 10:20:30], ~U[2018-01-02 10:20:30Z]] do
+      rrule = %RRULE{freq: :daily, until: until}
+      assert RRULE.parse(to_string(rrule)) == {:ok, rrule}
+    end
   end
 
   test "to_string/1" do
@@ -67,8 +87,14 @@ defmodule CalendarRecurrence.RRULETest do
     assert "FREQ=DAILY;UNTIL=20180102T102030" =
              to_string(%RRULE{freq: :daily, until: ~N[2018-01-02 10:20:30Z]})
 
-    assert "FREQ=DAILY;UNTIL=20180102T102030" =
+    assert "FREQ=DAILY;UNTIL=20180102T102030Z" =
              to_string(%RRULE{freq: :daily, until: ~U[2018-01-02 10:20:30Z]})
+
+    until =
+      DateTime.new!(~D[2018-01-02], ~T[10:20:30], "Europe/Warsaw", Zoneinfo.TimeZoneDatabase)
+
+    assert "FREQ=DAILY;UNTIL=20180102T092030Z" =
+             to_string(%RRULE{freq: :daily, until: until})
 
     assert "FREQ=DAILY;BYSECOND=5,10" = to_string(%RRULE{freq: :daily, bysecond: [5, 10]})
     assert "FREQ=DAILY;BYMINUTE=5,10" = to_string(%RRULE{freq: :daily, byminute: [5, 10]})
