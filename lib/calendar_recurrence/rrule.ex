@@ -422,7 +422,8 @@ defmodule CalendarRecurrence.RRULE do
     defp add_part(:interval, 1), do: nil
 
     defp add_part(:until = key, %DateTime{} = value) do
-      key_value(key, DateTime.to_naive(value) |> NaiveDateTime.to_iso8601(:basic))
+      utc = value |> DateTime.shift_zone!("Etc/UTC") |> DateTime.to_naive()
+      key_value(key, NaiveDateTime.to_iso8601(utc, :basic) <> "Z")
     end
 
     defp add_part(:until = key, %NaiveDateTime{} = value) do

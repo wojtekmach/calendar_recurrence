@@ -27,6 +27,18 @@ if Code.ensure_loaded?(NimbleParsec) do
       |> choice()
     end
 
+    # RFC 5545 numeric values are 1*2DIGIT, so both "5" and "05" are valid.
+    # Longer alternatives come first so "10" is not consumed as "1".
+    def integer_in(range) do
+      range
+      |> Enum.flat_map(&[{Integer.to_string(&1), &1}, {zero_pad(&1, 2), &1}])
+      |> Enum.uniq()
+      |> Enum.sort_by(fn {string, _value} -> byte_size(string) end, :desc)
+      |> Enum.map(fn {string, value} -> replace(string(string), value) end)
+      |> choice()
+      |> lookahead_not(ascii_char([?0..?9]))
+    end
+
     def zero_pad(val, count) when val >= 0 do
       num = Integer.to_string(val)
       :binary.copy("0", count - byte_size(num)) <> num
@@ -81,28 +93,22 @@ defmodule CalendarRecurrence.RRULE.Parser do
 
   interval = part("INTERVAL", integer(min: 1))
 
-  seconds = any_of(59..0//-1, &string(to_string(&1)))
+  seconds = integer_in(0..59)
   bysecond = part("BYSECOND", non_empty_list(seconds))
 
-  minutes = any_of(59..0//-1, &string(to_string(&1)))
+  minutes = integer_in(0..59)
   byminute = part("BYMINUTE", non_empty_list(minutes))
 
-  hours = any_of(23..0//-1, &string(to_string(&1)))
+  hours = integer_in(0..23)
   byhour = part("BYHOUR", non_empty_list(hours))
 
   days = any_of(~w(SU MO TU WE TH FR SA), &string(to_string(&1)))
   byday = part("BYDAY", non_empty_list(days))
 
-  months = any_of(1..12, &string(to_string(&1)))
+  months = integer_in(1..12)
   bymonth = part("BYMONTH", non_empty_list(months))
 
-  monthdays =
-    choice(
-      Enum.map(
-        Enum.concat(-31..-1, 31..1//-1),
-        &string(to_string(&1))
-      )
-    )
+  monthdays = integer_in(Enum.concat(-31..-1, 1..31))
 
   bymonthday = part("BYMONTHDAY", non_empty_list(monthdays))
 
@@ -156,8 +162,8 @@ defmodule CalendarRecurrence.RRULE.Parser do
   end
 
   defp cast_value("BYDAY", days), do: Enum.map(days, &cast_byday/1)
-  defp cast_value("BYMONTHDAY", days) when is_list(days), do: Enum.map(days, &String.to_integer/1)
-  defp cast_value("BYMONTHDAY", day), do: [String.to_integer(day)]
+  defp cast_value("BYMONTHDAY", days) when is_list(days), do: days
+  defp cast_value("BYMONTHDAY", day), do: [day]
 
   defp cast_value("BYMONTH", months) when is_list(months), do: months
   defp cast_value("BYMONTH", month), do: [month]
