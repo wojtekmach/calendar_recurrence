@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   test:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     env:
       MIX_ENV: test
     strategy:
@@ -18,19 +18,22 @@ jobs:
       matrix:
         include:
           - pair:
-              elixir: "1.14"
-              otp: "25.3.2.12"
+              elixir: "1.15"
+              otp: "26.2.5.21"
           - pair:
               elixir: "1.18"
               otp: "27.3.4"
           - pair:
               elixir: "1.19.2"
               otp: "28.1"
+          - pair:
+              elixir: "1.20.5"
+              otp: "29.1.3"
             lint: lint
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
 
-      - uses: erlef/setup-beam@v1
+      - uses: erlef/setup-beam@v1.24.1
         with:
           otp-version: ${{ matrix.pair.otp }}
           elixir-version: ${{ matrix.pair.elixir }}
@@ -38,7 +41,7 @@ jobs:
 
       - name: Cache deps
         id: cache-deps
-        uses: actions/cache@v4
+        uses: actions/cache@v6.1.0
         env:
           cache-name: cache-elixir-deps
         with:
@@ -49,7 +52,7 @@ jobs:
 
       - name: Cache compiled build
         id: cache-build
-        uses: actions/cache@v4
+        uses: actions/cache@v6.1.0
         env:
           cache-name: cache-compiled-build
         with:
